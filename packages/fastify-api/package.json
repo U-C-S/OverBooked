@@ -1,11 +1,12 @@
 {
-  "name": "fastify-api",
-  "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "fastify": "^3.25.3"
-  }
+	"name": "fastify-api",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"fastify": "^3.25.3"
+	}
 }
