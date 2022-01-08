@@ -1,25 +1,26 @@
 {
-  "name": "clink-node",
-  "version": "1.0.0",
-  "description": "",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/U-C-S/clink-node.git"
-  },
-  "workspaces": [
-    "packages/*"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/U-C-S/clink-node/issues"
-  },
-  "homepage": "https://github.com/U-C-S/clink-node#readme",
-  "prettier": {
-    "useTabs": true,
-    "printWidth": 110,
-    "tabWidth": 2
-  },
-  "devDependencies": {
-    "@types/node": "^17.0.8"
-  }
+	"name": "clink-node",
+	"version": "1.0.0",
+	"description": "",
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/U-C-S/clink-node.git"
+	},
+	"workspaces": [
+		"packages/*"
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/U-C-S/clink-node/issues"
+	},
+	"homepage": "https://github.com/U-C-S/clink-node#readme",
+	"prettier": {
+		"useTabs": true,
+		"printWidth": 110,
+		"tabWidth": 2
+	},
+	"devDependencies": {
+		"@types/node": "^17.0.8"
+	}
 }

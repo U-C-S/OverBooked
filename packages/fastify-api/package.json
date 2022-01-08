@@ -2,11 +2,14 @@
 	"name": "fastify-api",
 	"version": "1.0.0",
 	"description": "",
+	"private": true,
 	"type": "module",
 	"scripts": {
 		"start": "node index.js"
 	},
 	"dependencies": {
-		"fastify": "^3.25.3"
+		"fastify": "^3.25.3",
+		"fastify-postgres": "^3.6.0",
+		"pg": "^8.7.1"
 	}
 }

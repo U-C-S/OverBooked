@@ -1,10 +1,22 @@
 {
-  "name": "clink-site",
-  "version": "1.0.0",
-  "description": "",
-  "homepage": "https://github.com/U-C-S/clink-node#readme",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
-
+	"name": "clink-site",
+	"version": "0.0.0",
+	"description": "",
+	"private": true,
+	"homepage": "https://github.com/U-C-S/clink-node#readme",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"serve": "vite preview"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"solid-js": "^1.3.1"
+	},
+	"devDependencies": {
+		"tailwindcss": "^3.0.11",
+		"typescript": "^4.5.4",
+		"vite": "^2.7.10",
+		"vite-plugin-solid": "^2.2.1"
+	}
 }
