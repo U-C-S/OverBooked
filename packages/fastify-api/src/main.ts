@@ -2,13 +2,11 @@ import { NestFactory } from "@nestjs/core";
 import { Module } from "@nestjs/common";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
+import { LinksController } from "./controllers/links.controller";
 
 @Module({
 	imports: [],
-	controllers: [AppController],
-	providers: [AppService],
+	controllers: [LinksController],
 })
 class AppModule {}
 
