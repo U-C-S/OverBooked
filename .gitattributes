@@ -1,1 +1,1 @@
-*.prisma linguist-language=Prisma
+*.prisma linguist-detectable=true
