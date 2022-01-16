@@ -8,13 +8,16 @@
 		"start:dev": "nest start --watch",
 		"start:prod": "node dist/main",
 		"prebuild": "rm -rf dist",
-		"build": "nest build"
+		"build": "nest build",
+		"prisma:migrate": "npx prisma migrate dev --name",
+		"prisma:generate": "npx prisma generate"
 	},
 	"dependencies": {
 		"@nestjs/common": "^8.2.5",
 		"@nestjs/core": "^8.2.5",
 		"@nestjs/platform-fastify": "^8.2.5",
 		"@nestjs/swagger": "^5.1.5",
+		"@prisma/client": "^3.8.1",
 		"fastify-helmet": "^6.0.0",
 		"fastify-swagger": "^4.13.1",
 		"reflect-metadata": "^0.1.13",
@@ -23,7 +26,7 @@
 	"devDependencies": {
 		"@nestjs/cli": "^8.2.0",
 		"@nestjs/schematics": "^8.0.5",
-		"ts-node": "^10.4.0",
+		"prisma": "^3.8.1",
 		"tsconfig-paths": "^3.12.0"
 	}
 }

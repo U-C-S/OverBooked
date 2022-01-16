@@ -5,6 +5,7 @@ import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify
 import fastifyHelmet from "fastify-helmet";
 
 import { LinksController } from "./links/links.controller";
+import { PrismaService } from "./services/prisma.service";
 
 @Module({
 	imports: [],
@@ -16,6 +17,8 @@ class AppModule {}
 
 (async () => {
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+	const prismaService: PrismaService = app.get(PrismaService);
+	prismaService.enableShutdownHooks(app);
 
 	app.register(fastifyHelmet);
 	app.enableCors();
