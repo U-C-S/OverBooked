@@ -1,7 +1,7 @@
 {
 	"name": "clink-node",
 	"version": "1.0.0",
-	"description": "",
+	"license": "MIT",
 	"private": true,
 	"repository": {
 		"type": "git",
@@ -10,18 +10,13 @@
 	"workspaces": [
 		"packages/*"
 	],
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/U-C-S/clink-node/issues"
+	"devDependencies": {
+		"@types/node": "^17.0.8",
+		"typescript": "^4.5.4"
 	},
-	"homepage": "https://github.com/U-C-S/clink-node#readme",
 	"prettier": {
 		"useTabs": true,
 		"printWidth": 110,
 		"tabWidth": 2
-	},
-	"devDependencies": {
-		"@types/node": "^17.0.8",
-		"typescript": "^4.5.4"
 	}
 }
