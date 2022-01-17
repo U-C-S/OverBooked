@@ -10,29 +10,47 @@ datasource db {
 }
 
 model User {
-  id        Int         @id @default(autoincrement())
-  email     String      @unique
-  name      String?     @unique
-  Directory Directory[]
+  id      Int    @id @default(autoincrement())
+  email   String @unique
+  name    String @unique
+  UserDir Int    @unique
+
+  URD UserRootDirectory @relation(fields: [UserDir], references: [id])
+}
+
+model UserRootDirectory {
+  id   Int   @id @default(autoincrement())
+  user User?
+
+  Dirs          Directory[]
+  quickAddLinks Link[]
+  // rssfeeds       Rssfeed[]
 }
 
 model Directory {
-  id      Int    @id @default(autoincrement())
-  name    String @unique
-  owner   User   @relation(fields: [ownerId], references: [id])
-  ownerId Int
-  Links   Link[]
+  id                  Int    @id @default(autoincrement())
+  name                String @unique
+  userRootDirectoryId Int
+  Content_Links       Link[]
+
+  UserRootDirectory UserRootDirectory @relation(fields: [userRootDirectoryId], references: [id])
+  // parentDir           Int
+  // Content_Directories Directory[] @relation("SubDirectories")
+  // UserRootDirectory UserRootDirectory? @relation(fields: [userRootDirectoryId], references: [id])
 }
 
 model Link {
-  id          Int        @id @default(autoincrement())
-  url         String
-  name        String
-  createdAt   DateTime   @default(now())
-  source      Source     @default(Unknown)
-  Directory   Directory? @relation(fields: [directoryId], references: [id])
-  directoryId Int?
-  Tags        Link_Tag[]
+  id        Int        @id @default(autoincrement())
+  url       String
+  name      String
+  createdAt DateTime   @default(now())
+  source    Source     @default(Unknown)
+  Tags      Link_Tag[]
+
+  quickAddDirId Int?
+  directoryId   Int?
+  quickAddDir   UserRootDirectory? @relation(fields: [quickAddDirId], references: [id])
+  Directory     Directory?         @relation(fields: [directoryId], references: [id])
 }
 
 enum Source {
