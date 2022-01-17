@@ -4,24 +4,24 @@ import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import fastifyHelmet from "fastify-helmet";
 
-import { LinksController } from "./links/links.controller";
-import { PrismaService } from "./services/prisma.service";
+import { QuickAddController } from "./controllers";
+import { PrismaService } from "./services";
 
 @Module({
 	imports: [],
-	controllers: [LinksController],
-	providers: [],
+	controllers: [QuickAddController],
+	providers: [PrismaService],
 	exports: [],
 })
 class AppModule {}
 
 (async () => {
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
-	const prismaService: PrismaService = app.get(PrismaService);
-	prismaService.enableShutdownHooks(app);
+	// const prismaService: PrismaService = app.get(PrismaService);
+	// prismaService.enableShutdownHooks(app);
 
 	app.register(fastifyHelmet);
-	app.enableCors();
+	// app.enableCors();
 
 	const config = new DocumentBuilder()
 		.setTitle("Clink OpenAPI Server")
@@ -29,7 +29,7 @@ class AppModule {}
 		.setLicense("MIT", "https://github.com/U-C-S/clink-node/blob/main/LICENSE")
 		.build();
 	const document = SwaggerModule.createDocument(app, config);
-	SwaggerModule.setup("API", app, document);
+	SwaggerModule.setup("api", app, document);
 
 	await app.listen(3100);
 	console.log(`Server running on: ${await app.getUrl()}`);
