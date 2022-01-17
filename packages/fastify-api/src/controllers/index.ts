@@ -1,1 +1,1 @@
-export { QuickAddController } from "./quickadd.controller";
+export { QuickAddLinksModule } from "./quick-add";

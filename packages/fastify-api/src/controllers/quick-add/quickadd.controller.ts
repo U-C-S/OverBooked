@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
-import { UserRootDirectory, Link } from "@prisma/client";
+import { Controller, Get, Post, Query } from "@nestjs/common";
+import { Link } from "@prisma/client";
 import { PrismaService } from "src/services";
 
 @Controller("/quickadd")

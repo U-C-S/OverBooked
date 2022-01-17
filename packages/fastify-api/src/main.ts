@@ -4,12 +4,12 @@ import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import fastifyHelmet from "fastify-helmet";
 
-import { QuickAddController } from "./controllers";
+import { QuickAddLinksModule } from "./controllers";
 import { PrismaService } from "./services";
 
 @Module({
-	imports: [],
-	controllers: [QuickAddController],
+	imports: [QuickAddLinksModule],
+	controllers: [],
 	providers: [PrismaService],
 	exports: [],
 })
@@ -17,11 +17,20 @@ class AppModule {}
 
 (async () => {
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
-	// const prismaService: PrismaService = app.get(PrismaService);
-	// prismaService.enableShutdownHooks(app);
 
-	app.register(fastifyHelmet);
-	// app.enableCors();
+	app.get(PrismaService).enableShutdownHooks(app);
+
+	app.register(fastifyHelmet, {
+		contentSecurityPolicy: {
+			directives: {
+				defaultSrc: [`'self'`],
+				styleSrc: [`'self'`, `'unsafe-inline'`],
+				imgSrc: [`'self'`, "data:", "validator.swagger.io"],
+				scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+			},
+		},
+	});
+	app.enableCors();
 
 	const config = new DocumentBuilder()
 		.setTitle("Clink OpenAPI Server")
@@ -32,5 +41,5 @@ class AppModule {}
 	SwaggerModule.setup("api", app, document);
 
 	await app.listen(3100);
-	console.log(`Server running on: ${await app.getUrl()}`);
+	console.log(`Swagger running on: ${await app.getUrl()}/api`);
 })();
