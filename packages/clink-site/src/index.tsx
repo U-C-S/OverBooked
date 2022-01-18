@@ -1,6 +1,19 @@
-import './index.css';
-import { render } from 'solid-js/web';
+import "./assets/index.css";
+import { Component, Suspense } from "solid-js";
+import { render } from "solid-js/web";
+import { Router, useRoutes } from "solid-app-router";
+import TheRoutes from "./pages";
 
-import App from './App';
+const Routes = useRoutes(TheRoutes);
 
-render(() => <App />, document.getElementById('root') as HTMLElement);
+const App: Component = () => {
+	return (
+		<Router>
+			<Suspense>
+				<Routes />
+			</Suspense>
+		</Router>
+	);
+};
+
+render(() => <App />, document.getElementById("root") as HTMLElement);
