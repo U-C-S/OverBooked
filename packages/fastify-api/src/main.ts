@@ -6,9 +6,10 @@ import fastifyHelmet from "fastify-helmet";
 
 import { QuickAddLinksModule } from "./controllers";
 import { PrismaService } from "./services";
+import AuthModule from "./auth";
 
 @Module({
-	imports: [QuickAddLinksModule],
+	imports: [QuickAddLinksModule, AuthModule],
 	controllers: [],
 	providers: [PrismaService],
 	exports: [],

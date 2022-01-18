@@ -1,48 +1,18 @@
 import { Body, Controller, Post } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
-import { hashSync } from "bcrypt";
-import { PrismaService } from "src/services";
 import { LoginDTO, SignupDTO } from "../validators";
+import { AuthService } from "./auth.service";
 
 @Controller("auth")
 export class AuthController {
-	constructor(private readonly prismaservice: PrismaService, private readonly jwtService: JwtService) {}
+	constructor(private readonly authurize: AuthService) {}
 
 	@Post("login")
 	async login(@Body() data: LoginDTO) {
-		const { email, password } = data;
-
-		const theuser = await this.prismaservice.user.findUnique({
-			where: { email },
-		});
-
-		if (theuser && theuser.password === password) {
-			const payload = {
-				id: theuser.id,
-				name: theuser.name,
-				email,
-			};
-			const accessToken = this.jwtService.sign(payload);
-			return {
-				accessToken,
-			};
-		}
-
-		return {
-			error: "Invalid credentials",
-		};
+		return await this.authurize.login(data);
 	}
 
 	@Post("signup")
 	async signup(@Body() data: SignupDTO) {
-		const theuser = await this.prismaservice.user.create({
-			data: {
-				name: data.name,
-				email: data.email,
-				password: hashSync(data.password, 10)
-			},
-		});
-
-		// TODO
+		return await this.authurize.signup(data);
 	}
 }
