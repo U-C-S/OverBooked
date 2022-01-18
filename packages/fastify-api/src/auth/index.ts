@@ -1,10 +1,20 @@
 import { Module } from "@nestjs/common";
+import { JwtModule, JwtService } from "@nestjs/jwt";
+import { PassportModule } from "@nestjs/passport";
+import { PrismaService } from "src/services";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 
 // maybe need to add prismaservice here
 @Module({
+	imports: [
+		PassportModule,
+		JwtModule.register({
+			secret: "secret",
+			signOptions: { expiresIn: "1w" },
+		}),
+	],
 	controllers: [AuthController],
-	providers: [AuthService],
+	providers: [AuthService, PrismaService],
 })
 export default class AuthModule {}

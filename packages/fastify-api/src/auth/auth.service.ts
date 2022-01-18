@@ -46,6 +46,10 @@ export class AuthService {
 			},
 		});
 
-		// TODO
+		if (!theuser) {
+			throw new HttpException("User already exists", 409);
+		} else {
+			return this.login({ email: data.email, password: data.password });
+		}
 	}
 }

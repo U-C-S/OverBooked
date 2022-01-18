@@ -11,7 +11,7 @@ import AuthModule from "./auth";
 @Module({
 	imports: [QuickAddLinksModule, AuthModule],
 	controllers: [],
-	providers: [PrismaService],
+	providers: [],
 	exports: [],
 })
 class AppModule {}
@@ -19,7 +19,7 @@ class AppModule {}
 (async () => {
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), {
 		cors: true,
-		logger: console,
+		// logger: console,
 	});
 
 	app.get(PrismaService).enableShutdownHooks(app);
