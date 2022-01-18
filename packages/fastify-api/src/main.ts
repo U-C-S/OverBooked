@@ -16,11 +16,14 @@ import { PrismaService } from "./services";
 class AppModule {}
 
 (async () => {
-	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), {
+		cors: true,
+		logger: console,
+	});
 
 	app.get(PrismaService).enableShutdownHooks(app);
 
-	app.register(fastifyHelmet, {
+	await app.register(fastifyHelmet, {
 		contentSecurityPolicy: {
 			directives: {
 				defaultSrc: [`'self'`],
@@ -30,7 +33,6 @@ class AppModule {}
 			},
 		},
 	});
-	app.enableCors();
 
 	const config = new DocumentBuilder()
 		.setTitle("Clink OpenAPI Server")
