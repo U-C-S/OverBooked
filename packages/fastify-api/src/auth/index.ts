@@ -1,6 +1,8 @@
 import { Module } from "@nestjs/common";
 import { JwtModule, JwtService } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
+
+import { JWT_SECRET } from "src/constants";
 import { PrismaService } from "src/services";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
@@ -10,7 +12,7 @@ import { AuthService } from "./auth.service";
 	imports: [
 		PassportModule,
 		JwtModule.register({
-			secret: "secret",
+			secret: JWT_SECRET,
 			signOptions: { expiresIn: "1w" },
 		}),
 	],
