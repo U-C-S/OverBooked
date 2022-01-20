@@ -1,7 +1,41 @@
-import type { Component } from "solid-js";
+import { Component, createResource, createSignal, onMount } from "solid-js";
+import { API_URL } from "../../constants";
+
+interface LoginDTO {
+	email: string;
+	password: string;
+}
 
 export const LoginModal: Component = () => {
-	console.log("LoginModal");
+	// console.log("LoginModal");
+
+	let email: HTMLInputElement, password: HTMLInputElement;
+	let [loginData, setLoginData] = createSignal<LoginDTO>(undefined);
+
+	createResource<{ accessToken: string; name: string }, LoginDTO>(loginData, async (x) => {
+		let response = await fetch(API_URL + "/auth/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(x),
+		});
+
+		let data = await response.json();
+		if (data.accessToken) {
+			localStorage.setItem("auth", data);
+		} else {
+			alert(data.message);
+		}
+
+		return data;
+	});
+
+	let formSubmit = (e: any) => {
+		e.preventDefault();
+		setLoginData({ name: "supermanny", email: email.value, password: password.value });
+	};
+
 	return (
 		<div class="min-h-full flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
 			<div class="max-w-sm w-full space-y-8">
@@ -13,7 +47,7 @@ export const LoginModal: Component = () => {
 					/>
 					<h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
 				</div>
-				<form class="mt-8 space-y-6 mx-8">
+				<form class="mt-8 space-y-6 mx-8" onSubmit={formSubmit} action="#">
 					<input type="hidden" name="remember" value="true" />
 					<div class="rounded-md shadow-sm -space-y-px">
 						<div>
@@ -21,6 +55,7 @@ export const LoginModal: Component = () => {
 								Email address
 							</label>
 							<input
+								ref={email}
 								id="email-address"
 								name="email"
 								type="email"
@@ -35,6 +70,7 @@ export const LoginModal: Component = () => {
 								Password
 							</label>
 							<input
+								ref={password}
 								id="password"
 								name="password"
 								type="password"
