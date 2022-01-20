@@ -5,11 +5,7 @@ const TheRoutes: RouteDefinition[] = [
 	{
 		path: "/",
 		component: lazy(() => import("./home")),
-	},
-	{
-		path: "/login",
-		component: lazy(() => import("./login")),
-	},
+	}
 ];
 
 export default TheRoutes;
