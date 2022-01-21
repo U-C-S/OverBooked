@@ -4,8 +4,8 @@
 	"description": "",
 	"private": true,
 	"scripts": {
+		"dev": "nest start --watch",
 		"start": "nest start",
-		"start:dev": "nest start --watch",
 		"start:prod": "node dist/main",
 		"prebuild": "rm -rf dist",
 		"build": "nest build",
@@ -13,17 +13,17 @@
 		"prisma:generate": "npx prisma generate"
 	},
 	"dependencies": {
-		"@nestjs/common": "^8.2.5",
-		"@nestjs/core": "^8.2.5",
+		"@nestjs/common": "^8.2.6",
+		"@nestjs/core": "^8.2.6",
 		"@nestjs/jwt": "^8.0.0",
 		"@nestjs/passport": "^8.1.0",
-		"@nestjs/platform-fastify": "^8.2.5",
+		"@nestjs/platform-fastify": "^8.2.6",
 		"@nestjs/swagger": "^5.1.5",
 		"@prisma/client": "^3.8.1",
 		"bcrypt": "^5.0.1",
 		"class-validator": "^0.13.2",
 		"dotenv": "^14.2.0",
-		"fastify-helmet": "^6.0.0",
+		"fastify-helmet": "^7.0.0",
 		"fastify-swagger": "^4.13.1",
 		"passport": "^0.5.2",
 		"passport-jwt": "^4.0.0"
