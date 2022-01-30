@@ -4,12 +4,12 @@ import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import fastifyHelmet from "fastify-helmet";
 
-import { QuickAddLinksModule } from "./controllers";
+import { QuickAddLinksModule, UserModule } from "./controllers";
 import { PrismaService } from "./services";
 import AuthModule from "./auth";
 
 @Module({
-	imports: [QuickAddLinksModule, AuthModule],
+	imports: [QuickAddLinksModule, AuthModule, UserModule],
 	controllers: [],
 	providers: [],
 	exports: [],
@@ -19,7 +19,7 @@ class AppModule {}
 (async () => {
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), {
 		cors: true,
-		// logger: console,
+		logger: console,
 	});
 
 	app.get(PrismaService).enableShutdownHooks(app);
