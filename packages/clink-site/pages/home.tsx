@@ -7,13 +7,13 @@ const App: Component = () => {
 	return (
 		<>
 			<nav>
-				<div class="flex justify-around">
-					<div class="bg-slate-200 shadow">
+				<div className="flex justify-around">
+					<div className="bg-slate-200 shadow">
 						<h1>Clink!</h1>
 					</div>
 					<div>
 						<button
-							class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
 							onClick={() => setShowdiag(prev => !prev)}
 						>
 							Login/SignUp
