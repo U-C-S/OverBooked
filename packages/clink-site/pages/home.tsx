@@ -1,8 +1,9 @@
-import { Component, createSignal } from "solid-js";
+import { NextPage } from "next";
+import { useState } from "react";
 import ModalDialog, { LoginModal } from "../components/modals";
 
-const App: Component = () => {
-	let [showdiag, setShowdiag] = createSignal(false);
+const Home: NextPage = () => {
+	let [showdiag, setShowdiag] = useState(false);
 
 	return (
 		<>
@@ -14,11 +15,10 @@ const App: Component = () => {
 					<div>
 						<button
 							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-							onClick={() => setShowdiag(prev => !prev)}
-						>
+							onClick={() => setShowdiag((prev) => !prev)}>
 							Login/SignUp
 						</button>
-						<ModalDialog show={showdiag()} closeCallBack={setShowdiag}>
+						<ModalDialog show={showdiag} closeCallBack={setShowdiag}>
 							<LoginModal />
 						</ModalDialog>
 					</div>
@@ -28,4 +28,4 @@ const App: Component = () => {
 	);
 };
 
-export default App;
+export default Home;
