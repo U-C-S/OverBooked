@@ -1,12 +1,21 @@
 {
 	"compilerOptions": {
-		"target": "ESNext",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"target": "ES2019",
 		"module": "ESNext",
 		"moduleResolution": "node",
-		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
-		"jsx": "preserve",
-		"jsxImportSource": "solid-js",
-		"types": ["vite/client"]
-	}
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+
+		"allowJs": true,
+		"skipLibCheck": true,
+		"noEmit": true,
+		"strict": true,
+		"incremental": true,
+		"forceConsistentCasingInFileNames": true,
+		"jsx": "preserve"
+	},
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+	"exclude": ["node_modules"]
 }
