@@ -1,7 +1,6 @@
 {
-	"name": "fastify-api",
+	"name": "api",
 	"version": "1.0.0",
-	"description": "",
 	"private": true,
 	"scripts": {
 		"dev": "nest start --watch",

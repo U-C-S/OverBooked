@@ -1,5 +1,5 @@
 {
-	"name": "clink-node",
+	"name": "clink-app",
 	"version": "1.0.0",
 	"license": "MIT",
 	"private": true,
@@ -8,6 +8,7 @@
 		"url": "git+https://github.com/U-C-S/clink-node.git"
 	},
 	"workspaces": [
+		"apps/*",
 		"packages/*"
 	],
 	"devDependencies": {
@@ -18,6 +19,7 @@
 		"useTabs": true,
 		"printWidth": 110,
 		"tabWidth": 2,
-		"bracketSameLine": true
+		"bracketSameLine": true,
+		"arrowParens": "avoid"
 	}
 }
