@@ -1,4 +1,3 @@
-// import { Component, createResource, createSignal, onMount } from "solid-js";
 import React, { useState } from "react";
 
 import { API_URL } from "../../lib/constants";
@@ -9,9 +8,6 @@ interface LoginDTO {
 }
 
 export const LoginModal = () => {
-	// console.log("LoginModal");
-
-	// let email: HTMLInputElement, password: HTMLInputElement;
 	let email = React.createRef<HTMLInputElement>();
 	let password = React.createRef<HTMLInputElement>();
 
