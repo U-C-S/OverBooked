@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"target": "ES2018",
+		"module": "commonjs",
+		"moduleResolution": "Node",
+
+		"strict": true,
+		"experimentalDecorators": true,
+
+		"declaration": true,
+		"declarationDir": "./types",
+		"outDir": "dist"
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"name": "contracts",
+	"version": "0.1.0",
+	"license": "MIT",
+	"private": true,
+	"types": "types/index.d.ts",
+	"main": "dist/index.js",
+	"files": [
+		"dist",
+		"types"
+	],
+	"scripts": {
+		"prepare": "tsc"
+	},
+	"dependencies": {
+		"class-validator": "^0.13.2"
+	},
+	"devDependencies": {
+		"typescript": "^4.5.5",
+		"@types/validator": "13.7.1"
+	}
+}
