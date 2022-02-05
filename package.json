@@ -12,7 +12,7 @@
 		"lib/*"
 	],
 	"scripts": {
-		"repo-init": "sh ./scripts/npm-init.sh"
+		"setup": "sh ./scripts/intial-setup.sh"
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.14"
