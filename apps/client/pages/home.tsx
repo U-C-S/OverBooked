@@ -34,9 +34,11 @@ const HomeContent = () => {
 
 const Home: NextPage = () => {
 	return (
-		<ModalsProvider>
-			<HomeContent />
-		</ModalsProvider>
+		<>
+			<ModalsProvider>
+				<HomeContent />
+			</ModalsProvider>
+		</>
 	);
 };
 

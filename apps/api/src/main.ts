@@ -19,7 +19,7 @@ class AppModule {}
 (async () => {
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), {
 		cors: true,
-		logger: console,
+		// logger: console,
 	});
 
 	app.get(PrismaService).enableShutdownHooks(app);
