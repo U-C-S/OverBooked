@@ -7,6 +7,7 @@ import fastifyHelmet from "fastify-helmet";
 import { QuickAddLinksModule, UserModule } from "./controllers";
 import { PrismaService } from "./services";
 import AuthModule from "./auth";
+import { CON_CONSTANTS } from "./constants";
 
 @Module({
 	imports: [QuickAddLinksModule, AuthModule, UserModule],
@@ -17,23 +18,15 @@ import AuthModule from "./auth";
 class AppModule {}
 
 (async () => {
-	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), {
-		cors: true,
-		// logger: console,
-	});
+	const app = await NestFactory.create<NestFastifyApplication>(
+		AppModule,
+		new FastifyAdapter({ logger: true }),
+		{ cors: true, logger: ["error", "warn"] }
+	);
 
 	app.get(PrismaService).enableShutdownHooks(app);
 
-	await app.register(fastifyHelmet, {
-		contentSecurityPolicy: {
-			directives: {
-				defaultSrc: [`'self'`],
-				styleSrc: [`'self'`, `'unsafe-inline'`],
-				imgSrc: [`'self'`, "data:", "validator.swagger.io"],
-				scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
-			},
-		},
-	});
+	await app.register(fastifyHelmet, CON_CONSTANTS.FASTIFY_HELMET_OPTIONS);
 
 	const config = new DocumentBuilder()
 		.setTitle("Clink OpenAPI Server")
