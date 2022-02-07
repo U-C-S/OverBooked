@@ -18,31 +18,24 @@ export class AuthService {
 		if (theuser && theuser.password === password) {
 			const payload = {
 				id: theuser.id,
-				name: theuser.name,
 				email,
 			};
 			const accessToken = this.jwtService.sign(payload);
-			return {
-				accessToken,
-				name: theuser.name,
-			};
+			return { accessToken };
 		}
 
 		throw new HttpException("Invalid credentials", 401);
 	}
 
 	async signup(data: SignupDTO) {
-		const URD = await this.prismaservice.userRootDirectory.create({
-			data: {},
-		});
-
-		const theuser = await this.prismaservice.user.create({
+		const theuser = await this.prismaservice.profile.create({
 			data: {
 				name: data.name,
-				email: data.email,
-				password: data.password,
-				URD: {
-					connect: { id: URD.id },
+				user: {
+					create: {
+						email: data.email,
+						password: data.password,
+					},
 				},
 			},
 		});

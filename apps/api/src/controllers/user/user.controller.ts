@@ -8,8 +8,8 @@ export class UserController {
 	constructor(private readonly prismaService: PrismaService) {}
 
 	@UseGuards(JwtAuthGuard)
-	@Get("/")
-	async currentUser(@Request() req): Promise<User> {
+	@Get()
+	async currentUser(@Request() req) {
 		// return this.prismaService.user.findUnique({ where: { id } });
 		return req.user;
 	}

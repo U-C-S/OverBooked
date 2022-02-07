@@ -15,6 +15,6 @@ export class AuthStrategy extends PassportStrategy(Strategy) {
 	}
 
 	async validate(payload: any) {
-		return { id: payload.id, name: payload.name, email: payload.email };
+		return payload.id; //use req.user for using this value
 	}
 }
