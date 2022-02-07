@@ -17,39 +17,39 @@ model User {
 }
 
 model Profile {
-  id        Int         @id @unique
+  id        Int      @id @unique
   user      User?
   name      String
   bio       String?
   avatar    String?
-  createdAt DateTime    @default(now())
+  createdAt DateTime @default(now())
 
-  shelves   Directory[]
-  quickAdd  Link[]
+  // shelves   Directory[]
+  quickAdd Link[]
 }
 
-model Directory {
-  id             Int     @id @default(autoincrement())
-  name           String  @unique
-  ownerProfileId Int
-  ownerProfile   Profile @relation(fields: [ownerProfileId], references: [id])
-  Content_Links  Link[]
-  // parentDir           Int
-  // Content_Directories Directory[] @relation("SubDirectories")
-  // Profile UserRootDirectory? @relation(fields: [userRootDirectoryId], references: [id])
-}
+// model Directory {
+//   id             Int     @id @default(autoincrement())
+//   name           String  @unique
+//   ownerProfileId Int
+//   ownerProfile   Profile @relation(fields: [ownerProfileId], references: [id])
+//   Content_Links  Link[]
+//   // parentDir           Int
+//   // Content_Directories Directory[] @relation("SubDirectories")
+//   // Profile UserRootDirectory? @relation(fields: [userRootDirectoryId], references: [id])
+// }
 
 model Link {
-  id            Int        @id @default(autoincrement())
-  url           String
-  name          String
-  createdAt     DateTime   @default(now())
-  source        Source     @default(Unknown)
-  Tags          Link_Tag[]
-  quickAddDirId Int?
-  directoryId   Int?
-  quickAddDir   Profile?   @relation(fields: [quickAddDirId], references: [id])
-  Directory     Directory? @relation(fields: [directoryId], references: [id])
+  id        Int      @id @default(autoincrement())
+  url       String
+  name      String
+  createdAt DateTime @default(now())
+  source    Source   @default(Unknown)
+  ownerId   Int
+  profile   Profile  @relation(fields: [ownerId], references: [id])
+  // Tags          Link_Tag[]
+  // directoryId   Int?
+  // Directory     Directory? @relation(fields: [directoryId], references: [id])
 }
 
 enum Source {
@@ -58,18 +58,18 @@ enum Source {
   Unknown
 }
 
-model Link_Tag {
-  linkId Int
-  tagId  Int
-  link   Link @relation(fields: [linkId], references: [id])
-  tag    Tag  @relation(fields: [tagId], references: [id])
+// model Link_Tag {
+//   linkId Int
+//   tagId  Int
+//   link   Link @relation(fields: [linkId], references: [id])
+//   tag    Tag  @relation(fields: [tagId], references: [id])
 
-  @@id([linkId, tagId])
-}
+//   @@id([linkId, tagId])
+// }
 
-model Tag {
-  id               Int        @id @default(autoincrement())
-  name             String
-  createdAt        DateTime   @default(now())
-  LinksWithThisTag Link_Tag[]
-}
+// model Tag {
+//   id               Int        @id @default(autoincrement())
+//   name             String
+//   createdAt        DateTime   @default(now())
+//   LinksWithThisTag Link_Tag[]
+// }
