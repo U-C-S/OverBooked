@@ -10,49 +10,46 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  name      String   @unique
-  createdAt DateTime @default(now())
-  UserDir   Int      @unique
-
-  URD UserRootDirectory @relation(fields: [UserDir], references: [id])
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  profile  Profile @relation(fields: [id], references: [id])
 }
 
-model UserRootDirectory {
-  id   Int   @id @default(autoincrement())
-  user User?
+model Profile {
+  id        Int         @id @unique
+  user      User?
+  name      String
+  bio       String?
+  avatar    String?
+  createdAt DateTime    @default(now())
 
-  Dirs          Directory[]
-  quickAddLinks Link[]
-  // rssfeeds       Rssfeed[]
+  shelves   Directory[]
+  quickAdd  Link[]
 }
 
 model Directory {
-  id                  Int    @id @default(autoincrement())
-  name                String @unique
-  userRootDirectoryId Int
-  Content_Links       Link[]
-
-  UserRootDirectory UserRootDirectory @relation(fields: [userRootDirectoryId], references: [id])
+  id             Int     @id @default(autoincrement())
+  name           String  @unique
+  ownerProfileId Int
+  ownerProfile   Profile @relation(fields: [ownerProfileId], references: [id])
+  Content_Links  Link[]
   // parentDir           Int
   // Content_Directories Directory[] @relation("SubDirectories")
-  // UserRootDirectory UserRootDirectory? @relation(fields: [userRootDirectoryId], references: [id])
+  // Profile UserRootDirectory? @relation(fields: [userRootDirectoryId], references: [id])
 }
 
 model Link {
-  id        Int        @id @default(autoincrement())
-  url       String
-  name      String
-  createdAt DateTime   @default(now())
-  source    Source     @default(Unknown)
-  Tags      Link_Tag[]
-
+  id            Int        @id @default(autoincrement())
+  url           String
+  name          String
+  createdAt     DateTime   @default(now())
+  source        Source     @default(Unknown)
+  Tags          Link_Tag[]
   quickAddDirId Int?
   directoryId   Int?
-  quickAddDir   UserRootDirectory? @relation(fields: [quickAddDirId], references: [id])
-  Directory     Directory?         @relation(fields: [directoryId], references: [id])
+  quickAddDir   Profile?   @relation(fields: [quickAddDirId], references: [id])
+  Directory     Directory? @relation(fields: [directoryId], references: [id])
 }
 
 enum Source {
