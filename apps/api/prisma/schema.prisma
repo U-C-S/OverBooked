@@ -10,14 +10,14 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
+  id       Int     @id @unique
   email    String  @unique
   password String
   profile  Profile @relation(fields: [id], references: [id])
 }
 
 model Profile {
-  id        Int      @id @unique
+  id        Int      @id @default(autoincrement())
   user      User?
   name      String
   bio       String?
