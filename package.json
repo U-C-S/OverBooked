@@ -1,11 +1,11 @@
 {
-	"name": "clink-app",
+	"name": "overbooked-app",
 	"version": "1.0.0",
 	"license": "MIT",
 	"private": true,
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/U-C-S/clink-node.git"
+		"url": "git+https://github.com/U-C-S/OverBooked.git"
 	},
 	"workspaces": [
 		"apps/*",
