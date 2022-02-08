@@ -1,35 +1,20 @@
 import { Controller, Get, Post, Query, Request, UseGuards } from "@nestjs/common";
 import { Link } from "@prisma/client";
 import { JwtAuthGuard } from "src/auth/auth.guard";
-import { PrismaService } from "src/services";
+import { QuickAddService } from "./quickadd.service";
 
 @Controller("/quickadd")
 @UseGuards(JwtAuthGuard)
 export class QuickAddController {
-	constructor(private readonly prismaService: PrismaService) {}
+	constructor(private readonly prismaService: QuickAddService) {}
 
 	@Get()
-	async getAllLinks(@Request() req): Promise<Link[]> {
-		let x = await this.prismaService.link.findMany({
-			where: {
-				ownerId: req.user,
-			},
-		});
-		return x;
+	async getAllLinks(@Request() req) {
+		return this.prismaService.getAllLinks(req.user);
 	}
 
 	@Post("/add")
 	async AddLink(@Request() req, @Query("name") name: string, @Query("url") url: string) {
-		console.log(name, url);
-		let x = await this.prismaService.link.create({
-			data: {
-				ownerId: req.user,
-				name,
-				url,
-				source: "Browser",
-			},
-		});
-
-		return x.id;
+		return this.prismaService.addLink(req.user, name, url);
 	}
 }
