@@ -1,16 +1,14 @@
 import { Controller, Get, Post, Query, Request, UseGuards } from "@nestjs/common";
-import { Link, User } from "@prisma/client";
 import { JwtAuthGuard } from "src/auth/auth.guard";
-import { PrismaService } from "src/services";
+import { UserService } from "./user.service";
 
 @Controller("/user")
 export class UserController {
-	constructor(private readonly prismaService: PrismaService) {}
+	constructor(private readonly userService: UserService) {}
 
 	@UseGuards(JwtAuthGuard)
-	@Get()
+	@Get("/profile")
 	async currentUser(@Request() req) {
-		// return this.prismaService.user.findUnique({ where: { id } });
-		return req.user;
+		return this.userService.findProfilebyId(req.user);
 	}
 }
