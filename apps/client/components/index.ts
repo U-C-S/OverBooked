@@ -1,1 +1,1 @@
-export { LoginModal } from "./modals/login";
+export { NavBarx } from "./navbar";

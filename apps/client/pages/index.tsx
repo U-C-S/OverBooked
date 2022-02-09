@@ -1,13 +1,23 @@
-import type { NextPage } from "next";
+import { NextPage } from "next";
+import { ModalsProvider } from "@mantine/modals";
+import { NavBarx } from "../components";
+
+const HomeContent = () => {
+	return (
+		<>
+			<main className="w-2/3 m-auto">
+				<NavBarx />
+			</main>
+		</>
+	);
+};
 
 const Home: NextPage = () => {
 	return (
 		<>
-			<main>
-				<h1>
-					Welcome to <a href="https://nextjs.org">Next.js!</a>
-				</h1>
-			</main>
+			<ModalsProvider>
+				<HomeContent />
+			</ModalsProvider>
 		</>
 	);
 };

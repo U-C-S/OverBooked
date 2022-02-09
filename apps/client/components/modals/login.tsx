@@ -1,13 +1,11 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 import { API_URL } from "../../lib/constants";
 
-interface LoginDTO {
-	email: string | undefined;
-	password: string | undefined;
-}
-
 export const LoginModal = () => {
+	const router = useRouter();
+
 	let email = React.createRef<HTMLInputElement>();
 	let password = React.createRef<HTMLInputElement>();
 
@@ -29,11 +27,10 @@ export const LoginModal = () => {
 		let data = await response.json();
 		if (data.accessToken) {
 			localStorage.setItem("auth", data);
+			router.push("/");
 		} else {
 			alert(data.message);
 		}
-
-		// setLoginData({ email: email.current?.value, password: password.current?.value });
 	};
 
 	return (
