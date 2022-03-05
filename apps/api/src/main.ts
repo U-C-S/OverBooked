@@ -7,7 +7,8 @@ import fastifyHelmet from "fastify-helmet";
 import { QuickAddLinksModule, UserModule } from "./controllers";
 import { PrismaService } from "./services";
 import AuthModule from "./auth";
-import { CON_CONSTANTS } from "./constants";
+import { CON_CONSTANTS, JWT_SECRET } from "./constants";
+import fastifyJwt from "fastify-jwt";
 
 @Module({
 	imports: [QuickAddLinksModule, AuthModule, UserModule],
@@ -27,6 +28,9 @@ class AppModule {}
 	app.get(PrismaService).enableShutdownHooks(app);
 
 	await app.register(fastifyHelmet, CON_CONSTANTS.FASTIFY_HELMET_OPTIONS);
+	await app.register(fastifyJwt, {
+		secret: JWT_SECRET,
+	});
 
 	const config = new DocumentBuilder()
 		.setTitle("Clink OpenAPI Server")
