@@ -1,14 +1,22 @@
 import { HttpException, Injectable } from "@nestjs/common";
+import { HttpAdapterHost } from "@nestjs/core";
 import { JwtService } from "@nestjs/jwt";
+import { FastifyAdapter } from "@nestjs/platform-fastify";
 
 import { LoginDTO, SignupDTO } from "contracts";
 import { PrismaService } from "src/services";
 
 @Injectable()
 export class AuthService {
-	constructor(private readonly jwtService: JwtService, private readonly prismaservice: PrismaService) {}
+	constructor(
+		private readonly jwtService: JwtService,
+		private readonly prismaservice: PrismaService,
+		private adapterHost: HttpAdapterHost
+	) {}
 
 	async login(data: LoginDTO) {
+		let x = this.adapterHost.httpAdapter.getInstance<FastifyAdapter | any>();
+
 		const { email, password } = data;
 
 		const theuser = await this.prismaservice.user.findUnique({
@@ -20,7 +28,9 @@ export class AuthService {
 				id: theuser.id,
 				email,
 			};
-			const accessToken = this.jwtService.sign(payload);
+			// const accessToken = this.jwtService.sign(payload);
+			let accessToken = x.jwt.sign(payload);
+
 			return { accessToken };
 		}
 

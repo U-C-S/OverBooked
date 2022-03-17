@@ -3,12 +3,12 @@ import { Module } from "@nestjs/common";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import fastifyHelmet from "fastify-helmet";
+import fastifyJwt from "fastify-jwt";
 
 import { QuickAddLinksModule, UserModule } from "./controllers";
 import { PrismaService } from "./services";
 import AuthModule from "./auth";
 import { CON_CONSTANTS, JWT_SECRET } from "./constants";
-import fastifyJwt from "fastify-jwt";
 
 @Module({
 	imports: [QuickAddLinksModule, AuthModule, UserModule],
@@ -30,6 +30,7 @@ class AppModule {}
 	await app.register(fastifyHelmet, CON_CONSTANTS.FASTIFY_HELMET_OPTIONS);
 	await app.register(fastifyJwt, {
 		secret: JWT_SECRET,
+		sign: { expiresIn: "1w" },
 	});
 
 	const config = new DocumentBuilder()
