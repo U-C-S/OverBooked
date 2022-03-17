@@ -1,4 +1,4 @@
-namespace api
+namespace OverbookedAPI
 {
     public class WeatherForecast
     {

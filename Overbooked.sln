@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "api\api.csproj", "{ECFDB823-3B4A-4BAF-BCE0-958FA6896FF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "overbooked-api", "api\OverbookedAPI.csproj", "{ECFDB823-3B4A-4BAF-BCE0-958FA6896FF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
