@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-api-62F4D17D-BF7B-42B4-920F-3F7676EB4325</UserSecretsId>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Auth\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
