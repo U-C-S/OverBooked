@@ -1,2 +1,3 @@
-archive/* -linguist-detectable
+archive/** linguist-vendored
+archive/** -linguist-detectable
 *.prisma linguist-detectable
