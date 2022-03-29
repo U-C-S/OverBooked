@@ -8,14 +8,10 @@
 		"url": "git+https://github.com/U-C-S/OverBooked.git"
 	},
 	"workspaces": [
-		"apps/*",
-		"lib/*"
+		"apps/client"
 	],
 	"scripts": {
 		"setup": "sh ./scripts/intial-setup.sh"
-	},
-	"devDependencies": {
-		"@types/node": "^17.0.21"
 	},
 	"prettier": {
 		"useTabs": true,

@@ -1,13 +1,11 @@
 import { NextPage } from "next";
 import { ModalsProvider } from "@mantine/modals";
-import { NavBarx } from "../components";
+import { HomeLayout } from "../components/Layout";
 
 const HomeContent = () => {
 	return (
 		<>
-			<main className="w-2/3 m-auto">
-				<NavBarx />
-			</main>
+			<HomeLayout />
 		</>
 	);
 };
