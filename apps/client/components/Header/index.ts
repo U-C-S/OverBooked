@@ -1,1 +1,2 @@
-export { Header } from "./Header.component";
+export { Header } from "./HeaderLogo";
+export { QuickBar } from "./QuickBar";
