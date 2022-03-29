@@ -1,4 +1,4 @@
-import { Button, createStyles, Text } from "@mantine/core";
+import { Button, createStyles, Group, SimpleGrid, Text } from "@mantine/core";
 import React from "react";
 
 const useStyles = createStyles({
@@ -23,10 +23,15 @@ export function QuickBar() {
 	return (
 		<div className={classes.wrapper}>
 			<div className={classes.quickbar}>
-				<Text>lol</Text>
-				<Button type="button" size="xs">
-					Login
-				</Button>
+				<Group spacing={5}>
+					<Text>lol</Text>
+					<Button type="button" size="xs">
+						Login
+					</Button>
+					<Button type="button" size="xs">
+						SignUp
+					</Button>
+				</Group>
 			</div>
 		</div>
 	);

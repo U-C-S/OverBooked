@@ -15,9 +15,7 @@ export function HomeLayout() {
 				style={{
 					paddingTop: "0px",
 				}}>
-				<header>
-					<div>OverBooked</div>
-				</header>
+				<Header />
 			</Grid.Col>
 
 			<Grid.Col
