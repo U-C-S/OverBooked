@@ -1,13 +1,20 @@
+using System.ComponentModel.DataAnnotations;
 
 namespace OverbookedAPI.Models;
 
 public class Link
 {
-  public int Id { get; set; }
+  public Guid Id { get; init; }
+
+  [Required]
   public string Name { get; set; }
+
+  [Required]
   public string Url { get; set; }
-  public DateTime CreatedAt { get; set; }
-  public Source Source { get; set; }
+
+  public DateTime CreatedAt { get; init; }
+
+  public Source Source = Source.Unknown;
 }
 
 public enum Source

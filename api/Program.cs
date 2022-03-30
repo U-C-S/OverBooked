@@ -11,8 +11,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddDbContext<OverbookedDbContext>(opts =>
 {
-    var constring = builder.Configuration.GetValue<string>("DatabaseConnectionString");
-    opts.UseNpgsql(constring);
+  var connectionString = builder.Configuration.GetValue<string>("DatabaseConnectionString");
+  if (connectionString == null)
+  {
+    throw new Exception("No Connection String");
+  }
+  else
+  {
+    opts.UseNpgsql(connectionString);
+  }
 });
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
