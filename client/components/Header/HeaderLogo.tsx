@@ -8,6 +8,7 @@ export function Header() {
 				align="center"
 				style={{
 					fontFamily: "Amatic SC",
+					userSelect: "none",
 				}}>
 				OverBooked
 			</Title>

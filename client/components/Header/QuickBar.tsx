@@ -5,15 +5,16 @@ const useStyles = createStyles({
 	wrapper: {
 		width: "100%",
 		display: "flex",
-		justifyContent: "center",
+		justifyContent: "right",
 	},
 
 	quickbar: {
 		display: "flex",
 		alignItems: "center",
-		padding: "5px",
-		borderRadius: "0 0 5px 5px",
-		backgroundColor: "white",
+		padding: "10px",
+		borderRadius: "0 0 7px 7px",
+		backgroundColor: "hsl(30, 100%, 99%)",
+		boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.2)",
 	},
 });
 
@@ -23,8 +24,7 @@ export function QuickBar() {
 	return (
 		<div className={classes.wrapper}>
 			<div className={classes.quickbar}>
-				<Group spacing={5}>
-					<Text>lol</Text>
+				<Group spacing={10}>
 					<Button type="button" size="xs">
 						Login
 					</Button>
