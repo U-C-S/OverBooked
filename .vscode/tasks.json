@@ -5,24 +5,33 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "NestJS API",
-			"type": "shell",
-			"command": "npm",
-			"args": ["run", "dev"],
-			"options": {
-				"cwd": "./apps/api"
-			},
-			"problemMatcher": ["$eslint-stylish"]
-		},
-		{
 			"label": "NextJS WebSite",
 			"type": "shell",
 			"command": "npm",
 			"args": ["run", "dev"],
 			"options": {
-				"cwd": "./apps/client"
+				"cwd": "./client"
 			},
 			"problemMatcher": ["$eslint-stylish"]
+		},
+		{
+			"label": "API Watch",
+			"command": "dotnet",
+			"type": "process",
+			"args": ["watch", "run", "--project", "${workspaceFolder}/api/OverbookedAPI.csproj"],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "API Publish",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"publish",
+				"${workspaceFolder}/api/OverbookedAPI.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
 		}
 	]
 }

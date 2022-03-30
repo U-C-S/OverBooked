@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"ms-dotnettools.csharp",
+		"visualstudioexptteam.vscodeintellicode",
+		"pkief.material-icon-theme",
+		"esbenp.prettier-vscode",
+		"christian-kohler.npm-intellisense",
+		"will-stone.plastic"
+	]
+}
