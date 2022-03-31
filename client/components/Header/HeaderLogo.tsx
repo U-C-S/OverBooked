@@ -7,6 +7,7 @@ export function Header() {
 			<Title
 				align="center"
 				style={{
+					fontSize: "38px",
 					fontFamily: "Amatic SC",
 					userSelect: "none",
 				}}>

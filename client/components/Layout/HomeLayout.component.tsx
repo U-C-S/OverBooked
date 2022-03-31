@@ -9,13 +9,14 @@ export function HomeLayout() {
 	return (
 		<>
 			<Grid
+				columns={16}
 				gutter={40}
 				style={{
 					width: "70%",
 					margin: "0 auto",
 				}}>
 				<Grid.Col
-					span={4}
+					span={5}
 					style={{
 						paddingTop: "0px",
 					}}>
@@ -23,7 +24,7 @@ export function HomeLayout() {
 				</Grid.Col>
 
 				<Grid.Col
-					span={8}
+					span={11}
 					style={{
 						paddingTop: "0px",
 						position: "sticky",
@@ -33,12 +34,12 @@ export function HomeLayout() {
 					<QuickBar />
 				</Grid.Col>
 
-				<Grid.Col span={4}>
+				<Grid.Col span={5}>
 					<NavigationBar />
 				</Grid.Col>
 
 				<Grid.Col
-					span={8}
+					span={11}
 					style={{
 						height: "800px",
 					}}>
