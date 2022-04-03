@@ -1,13 +1,15 @@
-using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace OverbookedAPI.Models;
 
 public class Profile
 {
-    public int Id { get; set; }
-    public User User { get; set; }
+    [Key]
+    public Guid Id { get; set; }
+
+    [Required]
     public string Name { get; set; }
+
     public DateTime CreatedAt { get; set; }
 
     public ICollection<Link>? QuickAdd { get; set; }
