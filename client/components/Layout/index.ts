@@ -1,1 +1,1 @@
-export { HomeLayout } from "./HomeLayout.component";
+export { HomeLayout } from "./_Layout";
