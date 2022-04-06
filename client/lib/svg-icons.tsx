@@ -1,1 +1,1 @@
-export { Bookmarks, DotsVertical, Plus, Rss as RssFeed, Search } from "tabler-icons-react";
+export { Bookmarks, DotsVertical, Plus, Rss as RssFeed, Search, Home2 as Home } from "tabler-icons-react";

@@ -1,6 +1,6 @@
-import { Button, createStyles, Group, Popover, SimpleGrid, Text, Image, Stack } from "@mantine/core";
+import { Button, createStyles, Group, Popover, SimpleGrid, Text, Image, Stack, Divider } from "@mantine/core";
 import React, { useState } from "react";
-import { DotsVertical } from "../../lib/svg-icons";
+import { DotsVertical, Bookmarks, Plus, Search, Home } from "../../lib/svg-icons";
 
 const useStyles = createStyles({
 	wrapper: {
@@ -12,14 +12,23 @@ const useStyles = createStyles({
 	quickbar: {
 		display: "flex",
 		alignItems: "center",
-		padding: "10px",
+		padding: "7px",
 		borderRadius: "0 0 7px 7px",
 		backgroundColor: "hsl(30, 100%, 99%)",
 		boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.2)",
 	},
 
-	additionalOpts: {
-		padding: "0px",
+	additionalOptsBtn: {
+		padding: "7px 5px 3px",
+		backgroundColor: "hsl(30, 100%, 100%)",
+		borderRadius: "4px",
+		outline: "none",
+		border: "none",
+		cursor: "pointer",
+
+		"&:hover": {
+			backgroundColor: "hsla(30, 100%, 35%, 0.2)",
+		},
 	},
 });
 
@@ -37,8 +46,34 @@ function NotLoggedIn() {
 }
 
 function LoggedIn() {
+	const { classes } = useStyles();
+
 	return (
-		<Group spacing={10}>
+		<Group spacing={5}>
+			<button className={classes.additionalOptsBtn}>
+				<Home />
+			</button>
+			<Divider
+				orientation="vertical"
+				style={{
+					width: "1px",
+					height: "auto",
+				}}
+			/>
+			<Text>Bookmarks</Text>
+			<button className={classes.additionalOptsBtn}>
+				<Bookmarks />
+			</button>
+			<button className={classes.additionalOptsBtn}>
+				<Plus />
+			</button>
+			<Divider
+				orientation="vertical"
+				style={{
+					width: "1px",
+					height: "auto",
+				}}
+			/>
 			<AdditionalOptionsPopOver />
 		</Group>
 	);
@@ -46,11 +81,12 @@ function LoggedIn() {
 
 function AdditionalOptionsPopOver() {
 	const [opened, setOpened] = useState(false);
+	const { classes } = useStyles();
 
 	const TargetBtn = () => (
-		<Button onClick={() => setOpened(o => !o)}>
+		<button onClick={() => setOpened(o => !o)} className={classes.additionalOptsBtn}>
 			<DotsVertical />
-		</Button>
+		</button>
 	);
 
 	return (
