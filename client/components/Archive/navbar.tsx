@@ -1,7 +1,7 @@
 import { Button, Center, Grid, Navbar } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import React from "react";
-import { LoginModal } from "./modals";
+import { LoginModal } from "./";
 
 const SubNavComponent = (props: { children: React.ReactChild }) => {
 	return (

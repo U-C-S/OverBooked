@@ -1,1 +1,1 @@
-export { NavBarx } from "./navbar";
+import React from "react";
