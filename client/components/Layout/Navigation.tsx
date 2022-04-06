@@ -10,12 +10,12 @@ const useStyles = createStyles({
 	},
 });
 
-export function NavigationBar() {
+export function NavigationBar({ children }: { children: React.ReactNode }) {
 	const { classes } = useStyles();
 
 	return (
 		<nav className={classes.nav}>
-			<div></div>
+			<div>{children}</div>
 		</nav>
 	);
 }

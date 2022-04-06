@@ -4,6 +4,7 @@ import { Button, Grid } from "@mantine/core";
 import { NavigationBar } from "./Navigation";
 import { MainContent } from "./Content";
 import { Footer } from "./Footer";
+import { SideBar } from "../SideBar";
 
 export function HomeLayout() {
 	return (
@@ -35,7 +36,9 @@ export function HomeLayout() {
 				</Grid.Col>
 
 				<Grid.Col span={5}>
-					<NavigationBar />
+					<NavigationBar>
+						<SideBar />
+					</NavigationBar>
 				</Grid.Col>
 
 				<Grid.Col
