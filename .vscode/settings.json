@@ -1,8 +1,5 @@
 {
-	"files.exclude": {
-		".gitattributes": true,
-		"archive/**": true
-	},
+	"files.exclude": {},
 	"editor.formatOnSave": true,
 	"workbench.colorTheme": "Plastic"
 }
