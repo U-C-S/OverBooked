@@ -1,8 +1,8 @@
 import { Button, createStyles, Group, Popover, SimpleGrid, Text, Image, Stack, Divider } from "@mantine/core";
 import React, { useState } from "react";
-import { DotsVertical, Bookmarks, Plus, Search, Home } from "../../lib/svg-icons";
+import { DotsVertical, Bookmarks, Plus, Search, Home2 } from "tabler-icons-react";
 
-const useStyles = createStyles({
+const useStyles = createStyles((theme, params, getRef) => ({
 	wrapper: {
 		width: "100%",
 		display: "flex",
@@ -30,7 +30,11 @@ const useStyles = createStyles({
 			backgroundColor: "hsla(30, 100%, 35%, 0.2)",
 		},
 	},
-});
+
+	additionalOptsBtnWithText: {
+		display: "flex",
+	},
+}));
 
 function NotLoggedIn() {
 	return (
@@ -46,12 +50,12 @@ function NotLoggedIn() {
 }
 
 function LoggedIn() {
-	const { classes } = useStyles();
+	const { classes, cx } = useStyles();
 
 	return (
 		<Group spacing={5}>
 			<button className={classes.additionalOptsBtn}>
-				<Home />
+				<Home2 />
 			</button>
 			<Divider
 				orientation="vertical"
@@ -60,8 +64,8 @@ function LoggedIn() {
 					height: "auto",
 				}}
 			/>
-			<Text>Bookmarks</Text>
-			<button className={classes.additionalOptsBtn}>
+			<button className={cx(classes.additionalOptsBtnWithText, classes.additionalOptsBtn)}>
+				<Text>Bookmarks</Text>
 				<Bookmarks />
 			</button>
 			<button className={classes.additionalOptsBtn}>

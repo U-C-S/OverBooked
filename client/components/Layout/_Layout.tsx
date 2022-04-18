@@ -10,7 +10,7 @@ export function HomeLayout() {
 	return (
 		<>
 			<Grid
-				columns={16}
+				columns={18}
 				gutter={40}
 				style={{
 					width: "70%",
@@ -25,7 +25,7 @@ export function HomeLayout() {
 				</Grid.Col>
 
 				<Grid.Col
-					span={11}
+					span={13}
 					style={{
 						paddingTop: "0px",
 						position: "sticky",
@@ -42,7 +42,7 @@ export function HomeLayout() {
 				</Grid.Col>
 
 				<Grid.Col
-					span={11}
+					span={13}
 					style={{
 						height: "800px",
 					}}>
