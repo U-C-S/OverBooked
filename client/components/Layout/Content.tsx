@@ -3,11 +3,13 @@ import React from "react";
 
 const useStyles = createStyles({
 	main: {
-		borderRadius: "7px",
+		borderRadius: "7px 0 0 0",
 		backgroundColor: "hsl(30, 100%, 99%)",
-		boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.2)",
-		minHeight: "600px",
-		height: "100%",
+		boxShadow: "inset 0px 0px 4px rgba(0, 0, 0, 0.4), 0px 0px 2px rgba(0, 0, 0, 0.4)",
+		minHeight: "calc(100vh - 60px)",
+		h1: {
+			margin: "0",
+		},
 	},
 });
 
@@ -16,7 +18,9 @@ export function MainContent() {
 
 	return (
 		<main className={classes.main}>
-			<div></div>
+			<div>
+				<h1>WHAT THE HELL IS THIS. AM I CRAZY OR THE WORLD IS ?</h1>
+			</div>
 		</main>
 	);
 }

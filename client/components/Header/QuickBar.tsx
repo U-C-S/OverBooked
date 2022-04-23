@@ -4,7 +4,6 @@ import { DotsVertical, Bookmarks, Plus, Search, Home2 } from "tabler-icons-react
 
 const useStyles = createStyles((theme, params, getRef) => ({
 	wrapper: {
-		width: "100%",
 		display: "flex",
 		justifyContent: "right",
 	},

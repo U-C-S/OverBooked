@@ -1,7 +1,7 @@
 import { Title } from "@mantine/core";
 import React from "react";
 
-export function Header() {
+export function HeaderLogo() {
 	return (
 		<header>
 			<Title
@@ -10,6 +10,7 @@ export function Header() {
 					fontSize: "38px",
 					fontFamily: "Amatic SC",
 					userSelect: "none",
+					height: "60px",
 				}}>
 				OverBooked
 			</Title>

@@ -4,14 +4,14 @@ import { Bookmarks, CodePlus, Home, Rss, Search } from "tabler-icons-react";
 
 const useStyles = createStyles((theme, params, getRef) => ({
 	sideBarContainer: {
-		height: "350px",
+		height: "auto",
 	},
 
 	sideBarBtn: {
 		display: "flex",
 		justifyContent: "space-between",
 		width: "130px",
-		padding: "10px",
+		padding: "5px",
 		outline: "none",
 		border: "none",
 		backgroundColor: "hsl(30, 100%, 95%)",
