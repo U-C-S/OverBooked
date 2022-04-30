@@ -1,5 +1,6 @@
 import { createStyles } from "@mantine/core";
 import React from "react";
+import { HeaderLogo } from "../Header";
 
 const useStyles = createStyles({
 	nav: {
@@ -12,8 +13,11 @@ export function NavigationBar({ children }: { children: React.ReactNode }) {
 	const { classes } = useStyles();
 
 	return (
-		<nav className={classes.nav}>
-			<div>{children}</div>
-		</nav>
+		<>
+			<HeaderLogo />
+			<nav className={classes.nav}>
+				<div>{children}</div>
+			</nav>
+		</>
 	);
 }

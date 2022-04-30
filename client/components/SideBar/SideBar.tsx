@@ -10,16 +10,22 @@ const useStyles = createStyles((theme, params, getRef) => ({
 	sideBarBtn: {
 		display: "flex",
 		justifyContent: "space-between",
-		width: "130px",
-		padding: "5px",
+		width: "170px",
+		padding: "10px 20px",
 		outline: "none",
 		border: "none",
-		backgroundColor: "hsl(30, 100%, 95%)",
+		backgroundColor: "transparent",
+		color: "azure",
 		borderRadius: "4px",
 		cursor: "pointer",
 
 		"&:hover": {
+			color: "hsl(240, 0%, 10%)",
 			backgroundColor: "hsla(30, 100%, 85%)",
+		},
+
+		div: {
+			fontFamily: "Ubuntu",
 		},
 	},
 }));

@@ -7,10 +7,11 @@ export function HeaderLogo() {
 			<Title
 				align="center"
 				style={{
-					fontSize: "38px",
+					fontSize: "40px",
 					fontFamily: "Amatic SC",
 					userSelect: "none",
-					height: "60px",
+					padding: "10px 5px 20px",
+					color: "hsl(30, 100%, 85%)",
 				}}>
 				OverBooked
 			</Title>
