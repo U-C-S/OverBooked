@@ -10,9 +10,6 @@
 	"workspaces": [
 		"client"
 	],
-	"scripts": {
-		"setup": "sh ./scripts/intial-setup.sh"
-	},
 	"prettier": {
 		"useTabs": true,
 		"printWidth": 110,
