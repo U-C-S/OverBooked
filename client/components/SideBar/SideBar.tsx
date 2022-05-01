@@ -9,23 +9,24 @@ const useStyles = createStyles((theme, params, getRef) => ({
 
 	sideBarBtn: {
 		display: "flex",
-		justifyContent: "space-between",
 		width: "170px",
-		padding: "10px 20px",
+		padding: "5px 10px",
 		outline: "none",
 		border: "none",
 		backgroundColor: "transparent",
-		color: "azure",
+		color: theme.colors.orange[0],
 		borderRadius: "4px",
 		cursor: "pointer",
+		transition: "all 0.1s linear",
 
 		"&:hover": {
-			color: "hsl(240, 0%, 10%)",
-			backgroundColor: "hsla(30, 100%, 85%)",
+			backgroundColor: theme.colors.blue[4],
 		},
 
 		div: {
-			fontFamily: "Ubuntu",
+			padding: "2px 0 0 12px",
+			fontFamily: "Nunito, sans-serif",
+			fontSize: "14px",
 		},
 	},
 }));

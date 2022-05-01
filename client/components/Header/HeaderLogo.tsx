@@ -6,13 +6,15 @@ export function HeaderLogo() {
 		<header>
 			<Title
 				align="center"
+				order={1}
 				style={{
 					fontSize: "40px",
-					fontFamily: "Amatic SC",
 					userSelect: "none",
-					padding: "10px 5px 20px",
-					color: "hsl(30, 100%, 85%)",
-				}}>
+					padding: "8px 0px",
+				}}
+				sx={theme => ({
+					color: theme.colors.red[6],
+				})}>
 				OverBooked
 			</Title>
 		</header>
