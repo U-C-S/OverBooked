@@ -2,7 +2,7 @@ import React from "react";
 import { Header, QuickBar } from "../Header";
 import { Button, Grid } from "@mantine/core";
 import { NavigationBar } from "./Navigation";
-import { MainContent } from "./Content";
+import { MainContent } from "../Content";
 import { Footer } from "./Footer";
 import { SideBar } from "../SideBar";
 
