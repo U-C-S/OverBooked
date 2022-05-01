@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { AppShell, Navbar, MediaQuery, Burger, useMantineTheme, createStyles, Divider } from "@mantine/core";
-import { HeaderLogo } from "../components/Header";
-import { SideBar } from "../components/SideBar";
-import { MainContent } from "../components/Layout/Content";
+import { HeaderLogo, SideBar } from "../components/Core";
 
 const useStyles = createStyles(theme => ({
 	sidenavbar: {
@@ -39,7 +37,7 @@ export default function AppShellDemo() {
 					<Divider my="sm" style={{ margin: "15px" }} />
 				</Navbar>
 			}>
-			<MainContent />
+			<h1>Bookmarks</h1>
 		</AppShell>
 	);
 }

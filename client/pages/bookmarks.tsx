@@ -1,11 +1,7 @@
 import { NextPage } from "next";
 import { ModalsProvider } from "@mantine/modals";
-import { HomeLayout } from "../components/Layout";
 import { AppShell, createStyles, Grid } from "@mantine/core";
-import { Header, HeaderLogo, QuickBar } from "../components/Header";
-import { MainContent } from "../components/Layout/Content";
-import { NavigationBar } from "../components/Layout/Navigation";
-import { SideBar } from "../components/SideBar";
+import { HeaderLogo, SideBar } from "../components/Core";
 
 const useStyles = createStyles({
 	sidenavbar: {
@@ -25,7 +21,7 @@ const Bookmarks: NextPage = () => {
 					<SideBar />
 				</Grid.Col>
 				<Grid.Col span={17}>
-					<MainContent />
+					<h1>Bookmarks</h1>
 				</Grid.Col>
 			</Grid>
 		</ModalsProvider>
