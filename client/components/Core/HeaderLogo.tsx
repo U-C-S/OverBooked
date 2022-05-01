@@ -10,7 +10,6 @@ export function HeaderLogo() {
 				style={{
 					fontSize: "40px",
 					userSelect: "none",
-					padding: "8px 0px",
 				}}
 				sx={theme => ({
 					color: theme.colors.red[6],
