@@ -7,9 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 {
     var services = builder.Services;
 
-    // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    //     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-
     services.AddDbContext<OverbookedDbContext>(opts =>
     {
         var connectionString = builder.Configuration.GetValue<string>("DatabaseConnectionString");
@@ -22,7 +19,9 @@ var builder = WebApplication.CreateBuilder(args);
             opts.UseNpgsql(connectionString);
         }
     });
-    services.AddTransient<AuthCheckMiddleware>();
+
+    services.AddTransient<JwtAuthMiddleware>();
+    
     services.AddControllers();
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
@@ -45,7 +44,7 @@ var app = builder.Build();
         context.Database.EnsureCreated();
     }
 
-    app.UseMiddleware<AuthCheckMiddleware>();
+    app.UseMiddleware<JwtAuthMiddleware>();
 
     app.UseHttpsRedirection();
 
