@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OverbookedAPI.Data;
 using OverbookedAPI.Models;
+using Util;
 
 namespace OverbookedAPI.Controllers;
 
@@ -19,35 +20,33 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public ActionResult Login([FromBody] LoginDTO logindata)
     {
-        var userContext = _context.Users;
-        var userlist = from user in userContext
-                where logindata.Email == user.Email && logindata.Password == user.Password
-                select user;
-        if (userlist.Count() == 0)
+        var profilelist = from profile in _context.Profiles
+                          where logindata.Email == profile.Email && logindata.Password == profile.Password
+                          select profile;
+        if (profilelist.Count() == 0)
         {
             return NotFound();
         }
         else
         {
-            return Ok(userlist.First().Id);
+            var x = profilelist.First().Id;
+            return Ok(Jwt.encode(x.ToString()));
         }
     }
 
     [HttpPost("signup")]
     public async Task<ActionResult> Signup([FromBody] SignUpDTO signupdata)
     {
-        User x = new User()
+        Profile x = new()
         {
+            Name = signupdata.Name,
             Email = signupdata.Email,
             Password = signupdata.Password,
-            Name = signupdata.Name,
-            Id = new(),
-            // WHERE PROFILE
         };
 
-        _context.Users.Add(x);
+        _context.Profiles.Add(x);
         await _context.SaveChangesAsync();
-        return CreatedAtAction("GetUser", new { id = x.Id }, x);
+        return Ok(Jwt.encode(x.Id.ToString()));
     }
 
     [HttpPost("github")]

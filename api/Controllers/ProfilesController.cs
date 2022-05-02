@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OverbookedAPI.Data;
+using OverbookedAPI.Models;
 
 namespace OverbookedAPI.Controllers;
 
@@ -17,7 +18,7 @@ public class ProfilesController : ControllerBase
     [HttpGet("getprofilename")]
     public ActionResult<String> GetProfileName()
     {
-        return Ok(HttpContext.Items["UserId"]?.ToString());
+        return Ok(((Profile)HttpContext.Items["currentUser"]).Name);
     }
 
     /*

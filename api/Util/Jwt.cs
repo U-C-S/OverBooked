@@ -1,14 +1,14 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace Util;
 
-public static class Jwt {
-      public static Object? decode(string? token)
+public static class Jwt
+{
+    public static Object? decode(string? token)
     {
-        var key = Encoding.ASCII.GetBytes("superman");
+        var key = Encoding.UTF8.GetBytes("supermanwhymanthisisoutoflaneanditsgone");
 
         var validatedResult = new JwtSecurityTokenHandler().ValidateTokenAsync(token, new TokenValidationParameters
         {
@@ -20,26 +20,26 @@ public static class Jwt {
             ClockSkew = TimeSpan.FromSeconds(100)
         }).Result;
 
-        if (validatedResult.IsValid) 
-          return validatedResult.Claims["userId"];
+        if (validatedResult.IsValid)
+            return validatedResult.Claims["userId"];
         else
-          return null;
+            return null;
     }
 
     public static string encode(string userId)
     {
-        var key = Encoding.ASCII.GetBytes("superman");
+        var key = Encoding.UTF8.GetBytes("supermanwhymanthisisoutoflaneanditsgone");
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Claims = new Dictionary<string,object>() {
-				{ "userId", userId }
-			},
+            Claims = new Dictionary<string, object>() {
+                { "userId", userId }
+            },
             Expires = DateTime.UtcNow.AddDays(14),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
         var tokenHandler = new JwtSecurityTokenHandler();
-		var l = tokenHandler.CreateToken(tokenDescriptor);
+        var l = tokenHandler.CreateToken(tokenDescriptor);
         var token = tokenHandler.WriteToken(l);
         return token;
     }

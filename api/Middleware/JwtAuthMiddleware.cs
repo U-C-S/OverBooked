@@ -1,20 +1,17 @@
-using System.Diagnostics;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
 using OverbookedAPI.Data;
-using OverbookedAPI.Models;
+using System.Diagnostics;
 using Util;
 
 namespace OverbookedAPI.Middleware;
 
 public class JwtAuthMiddleware : IMiddleware
 {
-  private readonly OverbookedDbContext dbContext;
+    private readonly OverbookedDbContext dbContext;
 
-  public JwtAuthMiddleware(OverbookedDbContext dbContext) {
+    public JwtAuthMiddleware(OverbookedDbContext dbContext)
+    {
         this.dbContext = dbContext;
-     }
+    }
 
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
@@ -24,7 +21,7 @@ public class JwtAuthMiddleware : IMiddleware
         if (authHeader.Count > 0)
         {
             var authHeaderValue = authHeader.FirstOrDefault();
-            var currentUser = dbContext.Users.Find(Jwt.decode(authHeaderValue));
+            var currentUser = dbContext.Profiles.Find(int.Parse(Jwt.decode(authHeaderValue).ToString()));
             Debug.WriteLine(authHeaderValue, currentUser);
             if (currentUser != null)
             {
@@ -33,7 +30,7 @@ public class JwtAuthMiddleware : IMiddleware
             }
         }
 
-        if(invalid)
+        if (!invalid)
             await next(context);
         else
         {
