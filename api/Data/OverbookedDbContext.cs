@@ -7,7 +7,7 @@ public class OverbookedDbContext : DbContext
 {
     public OverbookedDbContext(DbContextOptions<OverbookedDbContext> options) : base(options) { }
 
-    public DbSet<User> Users { get; set; }
+    // public DbSet<User> Users { get; set; }
     public DbSet<Link> Links { get; set; }
     public DbSet<Profile> Profiles { get; set; }
 
