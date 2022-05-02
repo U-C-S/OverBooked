@@ -1,13 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using OverbookedAPI.Data;
+using OverbookedAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 {
     var services = builder.Services;
 
-    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+    // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    //     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
     services.AddDbContext<OverbookedDbContext>(opts =>
     {
@@ -21,7 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
             opts.UseNpgsql(connectionString);
         }
     });
-
+    services.AddTransient<AuthCheckMiddleware>();
     services.AddControllers();
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
@@ -43,6 +44,8 @@ var app = builder.Build();
         var context = services.GetRequiredService<OverbookedDbContext>();
         context.Database.EnsureCreated();
     }
+
+    app.UseMiddleware<AuthCheckMiddleware>();
 
     app.UseHttpsRedirection();
 
