@@ -19,17 +19,17 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public ActionResult Login([FromBody] LoginDTO logindata)
     {
-        var x = _context.Users;
-        var y = from a in x
-                where logindata.Email == a.Email && logindata.Password == a.Password
-                select a;
-        if (y.Count() == 0)
+        var userContext = _context.Users;
+        var userlist = from user in userContext
+                where logindata.Email == user.Email && logindata.Password == user.Password
+                select user;
+        if (userlist.Count() == 0)
         {
             return NotFound();
         }
         else
         {
-            return Ok(y.First());
+            return Ok(userlist.First().Id);
         }
     }
 

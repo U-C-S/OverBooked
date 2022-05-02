@@ -11,19 +11,19 @@ public class AuthCheckMiddleware : IMiddleware
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         var authHeader = context.Request.Headers["Authorization"];
+
         if (authHeader.Count > 0)
         {
-            var authHeaderValueCharArray = authHeader.FirstOrDefault().ToCharArray();
-            var authHeaderValueString = new string(authHeaderValueCharArray, 0, authHeaderValueCharArray.Length);
-            var userId = int.Parse(authHeaderValueString);
-            context.Items["UserId"] = userId;
-            Debug.WriteLine(userId);
+            var authHeaderValue = authHeader.FirstOrDefault();
+            context.Items["UserId"] = authHeaderValue;
+            Debug.WriteLine(authHeaderValue);
+            await next(context);
         }
         else
         {
             context.Response.StatusCode = 401;
+            await context.Response.WriteAsJsonAsync(new { message = "Unauthorized" });
         }
 
-        await next(context);
     }
 }
