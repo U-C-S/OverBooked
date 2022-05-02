@@ -1,5 +1,7 @@
 {
-	"files.exclude": {},
+	"files.exclude": {
+		"archive": true,
+	},
 	"editor.formatOnSave": true,
 	"workbench.colorTheme": "Plastic"
 }

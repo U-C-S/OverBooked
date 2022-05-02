@@ -90,6 +90,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 						violet: colors.purple,
 						blue: colors.blue,
 					},
+					colorScheme: "dark",
 				}}>
 				<Component {...pageProps} />
 			</MantineProvider>
