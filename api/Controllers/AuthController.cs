@@ -30,7 +30,7 @@ public class AuthController : ControllerBase
         else
         {
             var x = profilelist.First().Id;
-            return Ok(Jwt.encode(x.ToString()));
+            return Ok(Jwt.Encode(x.ToString()));
         }
     }
 
@@ -46,7 +46,7 @@ public class AuthController : ControllerBase
 
         _context.Profiles.Add(x);
         await _context.SaveChangesAsync();
-        return Ok(Jwt.encode(x.Id.ToString()));
+        return Ok(Jwt.Encode(x.Id.ToString()));
     }
 
     [HttpPost("github")]

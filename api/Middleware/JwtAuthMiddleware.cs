@@ -16,26 +16,39 @@ public class JwtAuthMiddleware : IMiddleware
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         var authHeader = context.Request.Headers["Authorization"];
-        bool invalid = true;
-
-        if (authHeader.Count > 0)
+        if (context.Request.Path.Value.Contains("/auth/"))
         {
-            var authHeaderValue = authHeader.FirstOrDefault();
-            var currentUser = dbContext.Profiles.Find(int.Parse(Jwt.decode(authHeaderValue).ToString()));
-            Debug.WriteLine(authHeaderValue, currentUser);
-            if (currentUser != null)
-            {
-                invalid = false;
-                context.Items["currentUser"] = currentUser;
-            }
+            await next(context);
+            return;
         }
 
-        if (!invalid)
-            await next(context);
-        else
+        try
+        {
+            var authHeaderValue = authHeader.FirstOrDefault();
+            var decodeId = Jwt.Decode(authHeaderValue)?.ToString();
+            if (!string.IsNullOrEmpty(decodeId))
+            {
+                var Id = int.Parse(decodeId);
+                var currentUser = dbContext.Profiles.Find(Id);
+                Debug.WriteLine(authHeaderValue, currentUser);
+                if (currentUser != null)
+                {
+                    context.Items["currentUser"] = currentUser;
+                    await next(context);
+                }
+
+            }
+            else
+            {
+                throw new Exception("Invalid token");
+            }
+
+        }
+        catch (Exception)
         {
             context.Response.StatusCode = 401;
             await context.Response.WriteAsJsonAsync(new { message = "Unauthorized" });
         }
+
     }
 }
