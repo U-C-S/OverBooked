@@ -11,20 +11,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Identity.Web" Version="1.24.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.17.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>
