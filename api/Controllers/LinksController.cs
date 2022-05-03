@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OverbookedAPI.Data;
-using OverbookedAPI.Models;
+using OverbookedAPI.Data.Models;
 
 namespace OverbookedAPI.Controllers
 {

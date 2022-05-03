@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OverbookedAPI.Data;
-using OverbookedAPI.Models;
+using OverbookedAPI.Data.Models;
 using Util;
 
 namespace OverbookedAPI.Controllers;

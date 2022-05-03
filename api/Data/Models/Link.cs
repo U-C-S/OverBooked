@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace OverbookedAPI.Models;
+namespace OverbookedAPI.Data.Models;
 
 public class Link
 {

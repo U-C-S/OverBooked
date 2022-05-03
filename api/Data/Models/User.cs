@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace OverbookedAPI.Models;
+namespace OverbookedAPI.Data.Models;
 
 // Use Profile for now, instead of User.
 public class User

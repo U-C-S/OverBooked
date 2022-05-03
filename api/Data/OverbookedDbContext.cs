@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OverbookedAPI.Models;
+using OverbookedAPI.Data.Models;
 
 namespace OverbookedAPI.Data;
 

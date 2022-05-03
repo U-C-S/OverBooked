@@ -1,5 +1,5 @@
 using OverbookedAPI.Data;
-using OverbookedAPI.Models;
+using OverbookedAPI.Data.Models;
 
 namespace Util;
 
