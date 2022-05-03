@@ -1,6 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using OverbookedAPI.Data;
-using OverbookedAPI.Middleware;
+using Util;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,8 +21,8 @@ var builder = WebApplication.CreateBuilder(args);
         }
     });
 
-    services.AddTransient<JwtAuthMiddleware>();
-    
+    // services.AddTransient<JwtAuthMiddleware>();
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(Jwt.Config());
     services.AddControllers();
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
@@ -44,7 +45,7 @@ var app = builder.Build();
         context.Database.EnsureCreated();
     }
 
-    app.UseMiddleware<JwtAuthMiddleware>();
+    // app.UseMiddleware<JwtAuthMiddleware>();
 
     app.UseHttpsRedirection();
 

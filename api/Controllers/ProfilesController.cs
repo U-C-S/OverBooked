@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OverbookedAPI.Data;
-using OverbookedAPI.Models;
 
 namespace OverbookedAPI.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class ProfilesController : ControllerBase
@@ -18,7 +19,10 @@ public class ProfilesController : ControllerBase
     [HttpGet("getprofilename")]
     public ActionResult<String> GetProfileName()
     {
-        return Ok(((Profile)HttpContext.Items["currentUser"]).Name);
+        var lol = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "userId").Value;
+        var user = _context.Profiles.Find(int.Parse(lol));
+
+        return Ok(user.Name);
     }
 
     /*

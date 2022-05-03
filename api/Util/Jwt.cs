@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -13,7 +14,9 @@ public static class Jwt
 
     public static Object? Decode(string? token)
     {
-        var validatedResult = Validate(token);
+        var validatedResult = new JwtSecurityTokenHandler()
+            .ValidateTokenAsync(token, TokenValidation())
+            .Result;
 
         if (validatedResult.IsValid)
             return validatedResult.Claims["userId"];
@@ -21,22 +24,21 @@ public static class Jwt
             return null;
     }
 
-    private static TokenValidationResult Validate(string? token)
+    private static TokenValidationParameters TokenValidation()
     {
         var key = Encoding.UTF8.GetBytes(SECRET);
 
-        var validatedResult = new JwtSecurityTokenHandler().ValidateTokenAsync(token, new TokenValidationParameters
+        return new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
             ValidateIssuer = true,
             ValidateAudience = false,
+            ValidateLifetime = true,
             ValidIssuer = ISSUER,
             IssuerSigningKey = new SymmetricSecurityKey(key),
             ValidAlgorithms = new[] { SecurityAlgorithms.HmacSha256 },
             ClockSkew = TimeSpan.FromSeconds(100),
-        });
-
-        return validatedResult.Result;
+        };
     }
 
     public static string Encode(string userId)
@@ -44,7 +46,8 @@ public static class Jwt
         var key = Encoding.UTF8.GetBytes(SECRET);
 
         var claims = new[] {
-            new Claim("userId", userId)
+            new Claim("userId", userId),
+            new Claim("iat", DateTime.UtcNow.ToString()),
         };
 
         var securityToken = new JwtSecurityToken(
@@ -57,5 +60,10 @@ public static class Jwt
         );
 
         return new JwtSecurityTokenHandler().WriteToken(securityToken);
+    }
+
+    public static Action<JwtBearerOptions> Config()
+    {
+        return options => options.TokenValidationParameters = TokenValidation();
     }
 }

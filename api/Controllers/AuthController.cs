@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OverbookedAPI.Data;
 using OverbookedAPI.Models;
 using Util;
 
 namespace OverbookedAPI.Controllers;
 
-
+[AllowAnonymous]
 [Route("[controller]")]
 [ApiController]
 public class AuthController : ControllerBase
