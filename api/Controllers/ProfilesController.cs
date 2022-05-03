@@ -19,9 +19,11 @@ public class ProfilesController : ControllerBase
     [HttpGet("getprofilename")]
     public ActionResult<String> GetProfileName()
     {
-        var lol = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "userId").Value;
-        var user = _context.Profiles.Find(int.Parse(lol));
-
+        var user = Util.Get.Profile(HttpContext, _context);
+        if(user == null)
+        {
+            return BadRequest("User not found");
+        }
         return Ok(user.Name);
     }
 
