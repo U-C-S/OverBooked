@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+
 public class Bookmark
 {
+  [Key]
   public int Id { get; set; }
   public string Name { get; set; }
   public string Url { get; set; }
@@ -11,15 +14,22 @@ public class Bookmark
 
 public class Directory
 {
-  public Directory(string name) {
+  public Directory(string name)
+  {
     Name = name;
-    Id = new Random().Next();
     CreatedAt = DateTime.UtcNow;
   }
-  
+  public Directory()
+  {
+    CreatedAt = DateTime.UtcNow;
+    IsRoot = true;
+  }
+
+  [Key]
   public int Id { get; set; }
-  public string Name { get; set; }
+  public string? Name { get; set; }
   public DateTime CreatedAt { get; set; }
+  public bool IsRoot { get; set; } = false;
 
   public List<Directory>? SubDirectories { get; set; }
   public List<Bookmark>? Bookmarks { get; set; }
@@ -32,6 +42,7 @@ public class Directory
 
 public class DirInDir
 {
+  [Key]
   public int Id { get; set; }
   public int ParentDirId { get; set; }
   public Directory ParentDir { get; set; }
