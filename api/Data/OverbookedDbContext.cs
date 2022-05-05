@@ -13,6 +13,7 @@ public class OverbookedDbContext : DbContext
 
     public DbSet<Bookmark> Bookmarkx { get; set; }
     public DbSet<Directory> Directoriex { get; set; }
+    public DbSet<DirInDir> DirDirChild { get; set; }
 
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //{

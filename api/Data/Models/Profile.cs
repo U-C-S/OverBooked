@@ -25,7 +25,10 @@ public class Profile
 
     public DateTime CreatedAt { get; set; }
 
-    public ICollection<Link>? QuickAdd { get; set; }
+    public int? RootDirId { get; set; }
+    public Directory RootDir { get; set; }
+
+    // public ICollection<Link>? QuickAdd { get; set; }
 
     // public int UserId { get; set; }
 
