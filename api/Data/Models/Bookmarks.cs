@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using OverbookedAPI.Data.Models;
 
 public class Bookmark
 {
@@ -10,6 +11,8 @@ public class Bookmark
 
     public int ParentDirId { get; set; }
     public Directory ParentDir { get; set; }
+    public int OwnerId { get; set; }
+    public Profile? Owner { get; set; }
 }
 
 public class Directory
@@ -31,10 +34,10 @@ public class Directory
     public DateTime CreatedAt { get; set; }
     public bool IsRoot { get; set; } = false;
 
-    public List<Directory>? SubDirectories { get; set; }
-    public List<Bookmark>? Bookmarks { get; set; }
-    // public int ParentId { get; set; }
-    // public Directory? ParentDir { get; set; }
+    // public List<Directory>? SubDirectories { get; set; }
+    // public List<Bookmark>? Bookmarks { get; set; }
+    public int OwnerId { get; set; }
+    public Profile? Owner { get; set; }
 }
 
 // Seems not possible to have a array of foriegn keys

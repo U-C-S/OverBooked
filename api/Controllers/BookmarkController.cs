@@ -41,6 +41,17 @@ namespace OverbookedAPI.Controllers
             return Ok(dir);
         }
 
+        [HttpGet("getcurrentdirs")]
+        public ActionResult<IQueryable<Directory>> GetCurrentDirs([FromQuery] string currentdir)
+        {
+            var currentUser = Util.Get.Profile(HttpContext, _context).Id;
+            var directories = _context.DirDirChild
+                                    .Where(d => d.ParentDir.Name == currentdir && d.ParentDir.OwnerId == currentUser)
+                                    .Select(d => d.ChildDir);
+            return Ok(directories);
+        }
+
+
         [HttpPost("createbookmark")]
         public async Task<ActionResult<Bookmark>> CreateBookmark([FromQuery] string name, [FromQuery] string url, [FromQuery] string? dir)
         {
