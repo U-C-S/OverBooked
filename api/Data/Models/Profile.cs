@@ -4,11 +4,12 @@ namespace OverbookedAPI.Data.Models;
 
 public class Profile
 {
-    public Profile() {
+    public Profile()
+    {
         Name = String.Empty;
         Email = String.Empty;
         Password = String.Empty;
-        RootDir = new();
+        // RootDir = new();
     }
 
     [Key]
@@ -27,8 +28,8 @@ public class Profile
     [DataType(DataType.DateTime)]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    public int? RootDirId { get; set; }
-    public Directory RootDir { get; set; }
+    // public int? RootDirId { get; set; }
+    // public Directory RootDir { get; set; }
 
     // public ICollection<Link>? QuickAdd { get; set; }
 

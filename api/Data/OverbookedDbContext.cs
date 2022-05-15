@@ -8,12 +8,14 @@ public class OverbookedDbContext : DbContext
     public OverbookedDbContext(DbContextOptions<OverbookedDbContext> options) : base(options) { }
 
     public DbSet<Profile> Profiles { get; set; }
-    public DbSet<Bookmark> Bookmarkx { get; set; }
-    public DbSet<Directory> Directoriex { get; set; }
-    public DbSet<DirInDir> DirDirChild { get; set; }
+    public DbSet<Collection> Collections { get; set; }
+    public DbSet<Bookmark> Bookmarks { get; set; }
+    // public DbSet<Directory> Directoriex { get; set; }
+    // public DbSet<DirInDir> DirDirChild { get; set; }
 
 
-    protected override void OnModelCreating(ModelBuilder rules){
+    protected override void OnModelCreating(ModelBuilder rules)
+    {
         rules.Entity<Directory>();
     }
 }

@@ -24,49 +24,49 @@ namespace OverbookedAPI.Controllers
         }
 
 
-        [HttpPost("createdir")]
-        public async Task<ActionResult<Directory>> CreateDir([FromQuery] string dir)
-        {
-            var dirx = new Directory(dir);
-            _context.Directoriex.Add(dirx);
-            await _context.SaveChangesAsync();
+        // [HttpPost("createdir")]
+        // public async Task<ActionResult<Directory>> CreateDir([FromQuery] string dir)
+        // {
+        //     var dirx = new Directory(dir);
+        //     _context.Directoriex.Add(dirx);
+        //     await _context.SaveChangesAsync();
 
-            return Ok("Directory created");
-        }
+        //     return Ok("Directory created");
+        // }
 
-        [HttpGet("getdirs")]
-        public async Task<ActionResult<Directory>> GetDirs()
-        {
-            var dir = await _context.Directoriex.ToListAsync();
-            return Ok(dir);
-        }
+        // [HttpGet("getdirs")]
+        // public async Task<ActionResult<Directory>> GetDirs()
+        // {
+        //     var dir = await _context.Directoriex.ToListAsync();
+        //     return Ok(dir);
+        // }
 
-        [HttpGet("getcurrentdirs")]
-        public ActionResult<IQueryable<Directory>> GetCurrentDirs([FromQuery] string currentdir)
-        {
-            var currentUser = Util.Get.Profile(HttpContext, _context).Id;
-            var directories = _context.DirDirChild
-                                    .Where(d => d.ParentDir.Name == currentdir && d.ParentDir.OwnerId == currentUser)
-                                    .Select(d => d.ChildDir);
-            return Ok(directories);
-        }
+        // [HttpGet("getcurrentdirs")]
+        // public ActionResult<IQueryable<Directory>> GetCurrentDirs([FromQuery] string currentdir)
+        // {
+        //     var currentUser = Util.Get.Profile(HttpContext, _context)?.Id;
+        //     var directories = _context.DirDirChild
+        //                             .Where(d => d.ParentDir.Name == currentdir && d.ParentDir.OwnerId == currentUser)
+        //                             .Select(d => d.ChildDir);
+        //     return Ok(directories);
+        // }
 
 
         [HttpPost("createbookmark")]
         public async Task<ActionResult<Bookmark>> CreateBookmark([FromQuery] string name, [FromQuery] string url, [FromQuery] string? dir)
         {
-            var dirx = await _context.Directoriex.FirstOrDefaultAsync(x => x.Name == dir); //create a directory to store bookmarks quickly (name - Faststore, its a premitive directory)
-            if (dirx == null)
-            {
-                return NotFound("Directory not found");
-            }
+            // var dirx = await _context.Directoriex.FirstOrDefaultAsync(x => x.Name == dir); //create a directory to store bookmarks quickly (name - Faststore, its a premitive directory)
+            // if (dirx == null)
+            // {
+            //     return NotFound("Directory not found");
+            // }
             var bookmark = new Bookmark()
             {
                 Name = name,
                 Url = url,
-                ParentDir = dirx
+                // ParentDir = dirx
             };
-            _context.Bookmarkx.Add(bookmark);
+            // _context.Bookmarkx.Add(bookmark);
             await _context.SaveChangesAsync();
             return Ok("Bookmark created");
         }

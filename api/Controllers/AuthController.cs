@@ -45,7 +45,7 @@ public class AuthController : ControllerBase
             Password = signupdata.Password,
         };
 
-        _context.Directoriex.Add(x.RootDir);
+        // _context.Directoriex.Add(x.RootDir);
         _context.Profiles.Add(x);
 
         await _context.SaveChangesAsync();

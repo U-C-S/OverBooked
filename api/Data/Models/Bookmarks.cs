@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using OverbookedAPI.Data.Models;
 
-public class Bookmark
+public class Bookmarkx
 {
     [Key]
     public int Id { get; set; }
