@@ -23,6 +23,59 @@ namespace OverbookedAPI.Controllers
             _context = context;
         }
 
+        // create a collection
+        [HttpPost("createcollection")]
+        public ActionResult<Collection> CreateCollection(string name)
+        {
+            var user = Util.Get.Profile(HttpContext, _context);
+            if (user == null)
+            {
+                return BadRequest("User not found");
+            }
+            var collection = new Collection
+            {
+                Name = name,
+                profile = user
+            };
+            _context.Collections.Add(collection);
+            _context.SaveChanges();
+            return collection;
+        }
+
+        // create a bookmark
+        [HttpPost("createbookmark")]
+        public ActionResult<Bookmark> CreateBookmark(string name, string url, string collection)
+        {
+            var user = Util.Get.Profile(HttpContext, _context);
+            var coll = _context.Collections.FirstOrDefault(c => c.Name == collection && c.profile.Id == user.Id);
+            if (user == null || coll == null)
+            {
+                return BadRequest("User or collection not found");
+            }
+
+            var bookmark = new Bookmark
+            {
+                Name = name,
+                Url = url,
+                profile = user,
+                collection = coll
+            };
+            _context.Bookmarks.Add(bookmark);
+            _context.SaveChanges();
+            return bookmark;
+        }
+
+        // get all collections
+        [HttpGet("getcollections")]
+        public ActionResult<IEnumerable<Collection>> GetCollections()
+        {
+            var user = Util.Get.Profile(HttpContext, _context);
+            if (user == null)
+            {
+                return BadRequest("User not found");
+            }
+            return _context.Collections.Where(c => c.profile.Id == user.Id).ToList();
+        }
 
         // [HttpPost("createdir")]
         // public async Task<ActionResult<Directory>> CreateDir([FromQuery] string dir)
@@ -50,25 +103,5 @@ namespace OverbookedAPI.Controllers
         //                             .Select(d => d.ChildDir);
         //     return Ok(directories);
         // }
-
-
-        [HttpPost("createbookmark")]
-        public async Task<ActionResult<Bookmark>> CreateBookmark([FromQuery] string name, [FromQuery] string url, [FromQuery] string? dir)
-        {
-            // var dirx = await _context.Directoriex.FirstOrDefaultAsync(x => x.Name == dir); //create a directory to store bookmarks quickly (name - Faststore, its a premitive directory)
-            // if (dirx == null)
-            // {
-            //     return NotFound("Directory not found");
-            // }
-            var bookmark = new Bookmark()
-            {
-                Name = name,
-                Url = url,
-                // ParentDir = dirx
-            };
-            // _context.Bookmarkx.Add(bookmark);
-            await _context.SaveChangesAsync();
-            return Ok("Bookmark created");
-        }
     }
 }
