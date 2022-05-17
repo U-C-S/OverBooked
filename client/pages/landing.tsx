@@ -15,7 +15,7 @@ import {
 import { BrandGithub } from "tabler-icons-react";
 
 export default function AuthenticationForm() {
-	const [type, toggle] = useToggle("login", ["login", "register"]);
+	const [type, toggle] = useToggle("login", ["login", "signup"]);
 	const form = useForm({
 		initialValues: {
 			email: "",
@@ -26,9 +26,23 @@ export default function AuthenticationForm() {
 
 		validationRules: {
 			email: val => /^\S+@\S+$/.test(val),
-			password: val => val.length >= 8,
+			password: val => val.length >= 2,
 		},
 	});
+
+	const submit = (values: typeof form.values) => {
+		let rootUrl = process.env.NEXT_PUBLIC_API_SERVER;
+		fetch(`${rootUrl}/auth/${type}`, {
+			method: "POST",
+			headers: {
+				"Access-Control-Allow-Origin": "*",
+			},
+			body: JSON.stringify({
+				email: values.email,
+				password: values.password,
+			}),
+		});
+	};
 
 	return (
 		<Center style={{ width: "100%", height: "90vh" }}>
@@ -46,9 +60,9 @@ export default function AuthenticationForm() {
 
 				<Divider label="Or continue with email" labelPosition="center" my="lg" />
 
-				<form onSubmit={form.onSubmit(() => {})}>
+				<form onSubmit={form.onSubmit(submit)}>
 					<Group direction="column" grow>
-						{type === "register" && (
+						{type === "signup" && (
 							<TextInput
 								label="Name"
 								placeholder="Your name"
@@ -75,7 +89,7 @@ export default function AuthenticationForm() {
 							error={form.errors.password && "Password should include at least 6 characters"}
 						/>
 
-						{type === "register" && (
+						{type === "signup" && (
 							<Checkbox
 								label="I accept terms and conditions"
 								checked={form.values.terms}
@@ -86,7 +100,7 @@ export default function AuthenticationForm() {
 
 					<Group position="apart" mt="xl">
 						<Anchor component="button" type="button" color="gray" onClick={() => toggle()} size="xs">
-							{type === "register" ? "Already have an account? Login" : "Don't have an account? Register"}
+							{type === "signup" ? "Already have an account? Login" : "Don't have an account? signup"}
 						</Anchor>
 						<Button type="submit">{upperFirst(type)}</Button>
 					</Group>
