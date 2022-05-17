@@ -44,20 +44,28 @@ namespace OverbookedAPI.Controllers
 
         // create a bookmark
         [HttpPost("createbookmark")]
-        public ActionResult<Bookmark> CreateBookmark(string name, string url, string collection)
+        public async Task<ActionResult<Bookmark>> CreateBookmark(string name, string url, string? collection)
         {
-            var user = Util.Get.Profile(HttpContext, _context);
-            var coll = _context.Collections.FirstOrDefault(c => c.Name == collection && c.profile.Id == user.Id);
-            if (user == null || coll == null)
+            var profile = Util.Get.Profile(HttpContext, _context);
+            if (profile == null)
             {
                 return BadRequest("User or collection not found");
             }
-
+            Collection? coll;
+            if (collection == null)
+            {
+                coll = await _context.Collections.FirstAsync(c => c.Name == "Uncategorized" && c.profile.Id == profile.Id);
+            }
+            else{
+                coll = await _context.Collections.FirstAsync(c => c.Name == collection && c.profile.Id == profile.Id);
+                if (coll == null)
+                    coll = await _context.Collections.FirstAsync(c => c.Name == "Uncategorized" && c.profile.Id == profile.Id);
+            }
             var bookmark = new Bookmark
             {
                 Name = name,
                 Url = url,
-                profile = user,
+                profile = profile,
                 collection = coll
             };
             _context.Bookmarks.Add(bookmark);

@@ -44,9 +44,19 @@ public class AuthController : ControllerBase
             Email = signupdata.Email,
             Password = signupdata.Password,
         };
-
-        // _context.Directoriex.Add(x.RootDir);
         _context.Profiles.Add(x);
+        _context.Collections.Add(new Collection
+        {
+            Name = "Uncategorized",
+            profile = x,
+            Type = CollectionType.Uncategorized,
+        });
+        _context.Collections.Add(new Collection
+        {
+            Name = "Archive",
+            profile = x,
+            Type = CollectionType.Archive,
+        });
 
         await _context.SaveChangesAsync();
         return Ok(Jwt.Encode(x.Id.ToString()));
