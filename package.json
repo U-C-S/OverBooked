@@ -1,6 +1,6 @@
 {
 	"name": "overbooked-app",
-	"version": "1.0.0",
+	"version": "1.0.0-alpha",
 	"license": "MIT",
 	"private": true,
 	"repository": {
@@ -8,6 +8,8 @@
 		"url": "git+https://github.com/U-C-S/OverBooked.git"
 	},
 	"scripts": {
+		"init": "sh ./scripts/init.sh",
+		"dropdb": "dotnet-ef database drop --project api",
 		"start:api": "dotnet watch --project api",
 		"start:client": "npm run dev -w client"
 	},
@@ -22,7 +24,7 @@
 		"arrowParens": "avoid"
 	},
 	"engines": {
-		"node": ">=14.0.0",
+		"node": ">=16.0.0",
 		"npm": ">=8.0.0"
 	}
 }
