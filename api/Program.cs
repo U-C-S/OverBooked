@@ -7,22 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 {
     var services = builder.Services;
-
-    services.AddDbContext<OverbookedDbContext>(opts =>
+    
+    var JwtSecret = builder.Configuration.GetValue<string>("JWT_SECRET");
+    var connectionString = builder.Configuration.GetValue<string>("DatabaseConnectionString");
+    if (string.IsNullOrEmpty(connectionString) || string.IsNullOrEmpty(JwtSecret))
     {
-        var connectionString = builder.Configuration.GetValue<string>("DatabaseConnectionString");
-        if (connectionString == null)
-        {
-            throw new Exception("No Connection String");
-        }
-        else
-        {
-            opts.UseNpgsql(connectionString);
-        }
-    });
+        throw new Exception("Check and Add the Configuration Values for JWT_SECRET and DatabaseConnectionString");
+    }
 
+    services.AddDbContext<OverbookedDbContext>(opts => opts.UseNpgsql(connectionString));
     // services.AddTransient<JwtAuthMiddleware>();
-    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(Jwt.Config());
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(Jwt.Config(JwtSecret));
     services.AddControllers();
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();

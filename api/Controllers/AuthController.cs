@@ -12,10 +12,12 @@ namespace OverbookedAPI.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly OverbookedDbContext _context;
+    private readonly IConfiguration _config;
 
-    public AuthController(OverbookedDbContext context)
+    public AuthController(OverbookedDbContext context, IConfiguration config)
     {
         _context = context;
+        _config = config;
     }
 
     [HttpPost("login")]
@@ -31,7 +33,8 @@ public class AuthController : ControllerBase
         else
         {
             var x = profilelist.First().Id;
-            return Ok(Jwt.Encode(x.ToString()));
+            var jwt = Jwt.Encode(x.ToString(), _config.GetValue<string>("JWT_SECRET"));
+            return Ok(jwt);
         }
     }
 
@@ -59,7 +62,8 @@ public class AuthController : ControllerBase
         });
 
         await _context.SaveChangesAsync();
-        return Ok(Jwt.Encode(x.Id.ToString()));
+        var jwt = Jwt.Encode(x.Id.ToString(),_config.GetValue<string>("JWT_SECRET"));
+        return Ok(jwt);
     }
 
     [HttpPost("github")]

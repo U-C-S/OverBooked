@@ -8,14 +8,13 @@ namespace Util;
 
 public static class Jwt
 {
-    private static readonly string SECRET = "supermanwhymanthisisoutoflaneanditsgone";
     private static readonly string ISSUER = "overbooked";
     private static readonly int EXPIRE_DAYS = 14;
 
-    public static Object? Decode(string? token)
+    public static Object? Decode(string? token, string SECRET)
     {
         var validatedResult = new JwtSecurityTokenHandler()
-            .ValidateTokenAsync(token, TokenValidation())
+            .ValidateTokenAsync(token, TokenValidation(SECRET))
             .Result;
 
         if (validatedResult.IsValid)
@@ -24,7 +23,7 @@ public static class Jwt
             return null;
     }
 
-    private static TokenValidationParameters TokenValidation()
+    private static TokenValidationParameters TokenValidation(string SECRET)
     {
         var key = Encoding.UTF8.GetBytes(SECRET);
 
@@ -41,7 +40,7 @@ public static class Jwt
         };
     }
 
-    public static string Encode(string userId)
+    public static string Encode(string userId, string SECRET)
     {
         var key = Encoding.UTF8.GetBytes(SECRET);
 
@@ -62,8 +61,8 @@ public static class Jwt
         return new JwtSecurityTokenHandler().WriteToken(securityToken);
     }
 
-    public static Action<JwtBearerOptions> Config()
+    public static Action<JwtBearerOptions> Config(string SECRET)
     {
-        return options => options.TokenValidationParameters = TokenValidation();
+        return options => options.TokenValidationParameters = TokenValidation(SECRET);
     }
 }
