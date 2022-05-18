@@ -1,5 +1,5 @@
-using System.ComponentModel.DataAnnotations;
 using OverbookedAPI.Data.Models;
+using System.ComponentModel.DataAnnotations;
 
 public class Bookmarkx
 {
