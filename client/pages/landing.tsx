@@ -25,17 +25,17 @@ export default function AuthenticationForm() {
 		},
 
 		validationRules: {
-			email: val => /^\S+@\S+$/.test(val),
+			// email: val => /^\S+@\S+$/.test(val),
 			password: val => val.length >= 2,
 		},
 	});
 
 	const submit = (values: typeof form.values) => {
 		let rootUrl = process.env.NEXT_PUBLIC_API_SERVER;
-		fetch(`${rootUrl}/auth/${type}`, {
+		fetch(`${rootUrl}auth/${type}`, {
 			method: "POST",
 			headers: {
-				"Access-Control-Allow-Origin": "*",
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				email: values.email,

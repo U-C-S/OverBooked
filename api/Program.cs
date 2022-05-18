@@ -7,14 +7,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 {
     var services = builder.Services;
-    
+
     var JwtSecret = builder.Configuration.GetValue<string>("JWT_SECRET");
     var connectionString = builder.Configuration.GetValue<string>("DatabaseConnectionString");
+    var AllowedHosts = builder.Configuration.GetValue<string>("AllowedHosts");
+
     if (string.IsNullOrEmpty(connectionString) || string.IsNullOrEmpty(JwtSecret))
     {
         throw new Exception("Check and Add the Configuration Values for JWT_SECRET and DatabaseConnectionString");
     }
 
+    services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(policy => policy.WithOrigins(AllowedHosts).AllowAnyHeader());
+    });
     services.AddDbContext<OverbookedDbContext>(opts => opts.UseNpgsql(connectionString));
     // services.AddTransient<JwtAuthMiddleware>();
     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(Jwt.Config(JwtSecret));
@@ -43,6 +49,8 @@ var app = builder.Build();
     // app.UseMiddleware<JwtAuthMiddleware>();
 
     app.UseHttpsRedirection();
+
+    app.UseCors();
 
     app.UseAuthentication();
 
