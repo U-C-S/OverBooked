@@ -10,6 +10,7 @@
 	"scripts": {
 		"init": "sh ./scripts/init.sh",
 		"dropdb": "dotnet-ef database drop --project api",
+		"format": "dotnet format",
 		"start:api": "dotnet watch --project api",
 		"start:client": "npm run dev -w client"
 	},

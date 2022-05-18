@@ -20,7 +20,7 @@ public class ProfilesController : ControllerBase
     public ActionResult<String> GetProfileName()
     {
         var user = Util.Get.Profile(HttpContext, _context);
-        if(user == null)
+        if (user == null)
         {
             return BadRequest("User not found");
         }

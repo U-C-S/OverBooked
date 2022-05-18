@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OverbookedAPI.Data;
 using OverbookedAPI.Data.Models;
+using System.Diagnostics.CodeAnalysis;
 using Util;
 
 namespace OverbookedAPI.Controllers;
@@ -21,6 +22,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
+    [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "<Pending>")]
     public ActionResult Login([FromBody] LoginDTO logindata)
     {
         var profilelist = from profile in _context.Profiles
@@ -39,6 +41,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("signup")]
+    [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "<Pending>")]
     public async Task<ActionResult> Signup([FromBody] SignUpDTO signupdata)
     {
         Profile x = new()
@@ -62,7 +65,7 @@ public class AuthController : ControllerBase
         });
 
         await _context.SaveChangesAsync();
-        var jwt = Jwt.Encode(x.Id.ToString(),_config.GetValue<string>("JWT_SECRET"));
+        var jwt = Jwt.Encode(x.Id.ToString(), _config.GetValue<string>("JWT_SECRET"));
         return Ok(jwt);
     }
 
