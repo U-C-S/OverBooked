@@ -1,6 +1,7 @@
 __dump
 dist
 *.bak
+secrets.json
 
 # Logs
 logs

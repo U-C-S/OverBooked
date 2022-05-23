@@ -13,7 +13,7 @@
     "extensions": ["ms-dotnettools.csharp"],
 
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    "forwardPorts": [3000, 6000],
+    "forwardPorts": [3000, 6000, 6001, 5432],
 
 	// [Optional] To reuse of your local HTTPS dev cert:
 	//
